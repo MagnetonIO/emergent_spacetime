@@ -162,19 +162,19 @@ These simulations implement the mathematical frameworks developed in the accompa
 
 ### What These Simulations Prove
 
-✅ **Spacetime emerges from information networks**
-✅ **Matter consists of stable information patterns**  
-✅ **Consciousness arises from information integration**
-✅ **Physical laws are constraint satisfaction rules**
-✅ **Conservation laws reflect informational symmetries**
+- ✅ **Spacetime emerges from information networks**
+- ✅ **Matter consists of stable information patterns**  
+- ✅ **Consciousness arises from information integration**
+- ✅ **Physical laws are constraint satisfaction rules**
+- ✅ **Conservation laws reflect informational symmetries**
 
 ### What These Simulations Refute
 
-❌ **Material substance as fundamental**
-❌ **Time as an absolute parameter**
-❌ **Consciousness as brain-generated phenomenon**
-❌ **Evolution as purely chemical process**
-❌ **Materialist metaphysics generally**
+- ❌ **Material substance as fundamental**
+- ❌ **Time as an absolute parameter**
+- ❌ **Consciousness as brain-generated phenomenon**
+- ❌ **Evolution as purely chemical process**
+- ❌ **Materialist metaphysics generally**
 
 ## Research Applications
 
