@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergent Spacetime: Information-Theoretic Approach to Quantum Gravity</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .equation-box {
+            background: #f0f7ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+        .paper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .paper-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s;
+        }
+        .paper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .paper-card h4 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        .paper-card a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .paper-card a:hover {
+            text-decoration: underline;
+        }
+        .code-section {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .code-section h3 {
+            color: white;
+        }
+        .code-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .code-link {
+            background: #34495e;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .code-link:hover {
+            background: #3498db;
+        }
+        .nav {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            color: #3498db;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emergent Spacetime</h1>
+    <p class="subtitle">Quantum Information Theory Applied to Gravitational Physics</p>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#foundations">Foundations</a></li>
+            <li><a href="#papers">Papers</a></li>
+            <li><a href="#code">Code</a></li>
+            <li><a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <section id="overview" class="section">
+        <h2>Overview</h2>
+        <p>This research program investigates the emergence of spacetime geometry from quantum information-theoretic structures. We demonstrate how classical spacetime arises from quantum entanglement patterns and information processing constraints in quantum field theory.</p>
+        
+        <div class="equation-box">
+            <h4>Core Principle: Information-Energy Equivalence</h4>
+            $$E = Ic^2$$
+            <p>Where $I$ represents information content, establishing the fundamental equivalence between information and energy.</p>
+        </div>
+
+        <div class="highlight">
+            <strong>Key Result:</strong> Spacetime geometry emerges from quantum entanglement patterns, providing a framework for quantum gravity based on information-theoretic principles.
+        </div>
+    </section>
+
+    <section id="foundations" class="section">
+        <h2>Theoretical Foundations</h2>
+        
+        <h3>1. Spacetime from Entanglement</h3>
+        <p>Building on the ER=EPR correspondence, we show that geometric connectivity emerges from quantum entanglement:</p>
+        <div class="equation-box">
+            $$ds^2 = \frac{\ell_P^2}{4} \sum_{i,j} S_{ij} dx^i dx^j$$
+            <p>The metric tensor emerges from the entanglement entropy $S_{ij}$ between regions.</p>
+        </div>
+
+        <h3>2. Holographic Emergence</h3>
+        <p>The holographic principle suggests bulk physics is encoded on boundaries:</p>
+        <div class="equation-box">
+            $$|\Psi_{\text{bulk}}\rangle = \sum_i \alpha_i |\phi_i\rangle_{\text{boundary}}$$
+            <p>Bulk quantum states are reconstructed from boundary degrees of freedom.</p>
+        </div>
+
+        <h3>3. Quantum Error Correction</h3>
+        <p>Spacetime geometry provides natural error correction, explaining its stability:</p>
+        <div class="equation-box">
+            $$|\psi_{\text{logical}}\rangle = \mathcal{E}(|\psi_{\text{physical}}\rangle)$$
+            <p>The encoding map $\mathcal{E}$ protects quantum information, giving rise to stable geometric structures.</p>
+        </div>
+    </section>
+
+    <section id="papers" class="section">
+        <h2>Research Papers</h2>
+        
+        <h3>Quantum Gravity & Spacetime Emergence</h3>
+        <div class="paper-grid">
+            <div class="paper-card">
+                <h4>Entanglement and Spacetime</h4>
+                <p>Core paper demonstrating how spacetime geometry emerges from quantum entanglement patterns.</p>
+                <a href="papers/quantum-gravity/entanglement_spacetime_paper.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Quantum Gravity Treatise</h4>
+                <p>Comprehensive treatment of quantum gravity from information-theoretic principles.</p>
+                <a href="papers/quantum-gravity/quantum_gravity_treatise.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>ER=EPR Correspondence</h4>
+                <p>Exploration of how entanglement creates geometric connections (wormholes).</p>
+                <a href="papers/quantum-gravity/er-epr-treatise.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Black Hole Information Paradox</h4>
+                <p>Resolution through quantum error correction and holographic principles.</p>
+                <a href="papers/quantum-gravity/black_hole_information_paradox.pdf">Read Paper →</a>
+            </div>
+        </div>
+
+        <h3>Information Theory Foundations</h3>
+        <div class="paper-grid">
+            <div class="paper-card">
+                <h4>Information-Matter Correspondence</h4>
+                <p>Analysis of matter states as information-theoretic structures in quantum field theory.</p>
+                <a href="papers/information-theory/info_matter_dissertation.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Information-Energy Equivalence</h4>
+                <p>Derivation and implications of E = Ic².</p>
+                <a href="papers/information-theory/information_energy_equivalence.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Quantum Information Geometry</h4>
+                <p>Geometric structures in quantum information space.</p>
+                <a href="papers/information-theory/quantum-info-geometry-paper.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>QEC and Light Speed</h4>
+                <p>Quantum error correction constraints and relativistic invariance.</p>
+                <a href="papers/information-theory/qec_light_speed_paper.pdf">Read Paper →</a>
+            </div>
+        </div>
+
+        <h3>Cosmology & Emergence</h3>
+        <div class="paper-grid">
+            <div class="paper-card">
+                <h4>Emergent Spacetime Cosmology</h4>
+                <p>Cosmological implications of emergent spacetime framework.</p>
+                <a href="papers/cosmology/emergent_spacetime_paper.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Fine-Tuning Resolution</h4>
+                <p>Information-theoretic approach to cosmological parameters.</p>
+                <a href="papers/cosmology/fine_tuning_treatise.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Timeless Physics</h4>
+                <p>Constraint-based formulation of physics without fundamental time parameter.</p>
+                <a href="papers/foundations/timeless_physics.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Unified Physics</h4>
+                <p>Unification of fundamental forces through information principles.</p>
+                <a href="papers/foundations/unified-physics-paper.pdf">Read Paper →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="code" class="section">
+        <h2>Computational Implementations</h2>
+        
+        <div class="code-section">
+            <h3>Haskell Implementations</h3>
+            <p>Type-safe, functorial implementations of emergent spacetime physics:</p>
+            <div class="code-links">
+                <a href="code/haskell/quantum_gravity_main.hs" class="code-link">Quantum Gravity Core</a>
+                <a href="code/haskell/entanglement_spacetime_haskell.hs" class="code-link">Entanglement → Spacetime</a>
+                <a href="code/haskell/info_geometry.hs" class="code-link">Information Geometry</a>
+                <a href="code/haskell/black_hole_info.hs" class="code-link">Black Hole Information</a>
+                <a href="code/haskell/emergent_gauge.hs" class="code-link">Emergent Gauge Theory</a>
+                <a href="code/haskell/" class="code-link">View All Haskell Code →</a>
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>Python Simulations</h3>
+            <p>Numerical simulations and visualizations of emergent phenomena:</p>
+            <div class="code-links">
+                <a href="code/python/emergent_spacetime_code.py" class="code-link">Spacetime Emergence</a>
+                <a href="code/python/matter_emergence_code.py" class="code-link">Matter from Information</a>
+                <a href="code/python/cosmic_bootstrap_code.py" class="code-link">Universe Bootstrap</a>
+                <a href="code/python/consciousness_emergence_code.py" class="code-link">Consciousness Models</a>
+                <a href="code/python/" class="code-link">View All Python Code →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Key Results</h2>
+        
+        <div class="highlight">
+            <h4>1. Spacetime is Emergent</h4>
+            <p>Continuous spacetime arises from discrete quantum information through entanglement patterns and holographic encoding.</p>
+        </div>
+        
+        <div class="highlight">
+            <h4>2. Matter as Information</h4>
+            <p>Particles and fields are stable patterns in the quantum information substrate, protected by error correction.</p>
+        </div>
+        
+        <div class="highlight">
+            <h4>3. Information Integration</h4>
+            <p>Complex quantum systems exhibit integrated information processing with measurable correlations.</p>
+        </div>
+        
+        <div class="highlight">
+            <h4>4. Computational Framework</h4>
+            <p>The universe exhibits computational properties consistent with quantum information processing principles.</p>
+        </div>
+    </section>
+
+    <footer class="section">
+        <p style="text-align: center;">
+            <a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub Repository</a> | 
+            <a href="papers/">All Papers</a> | 
+            <a href="code/">All Code</a> |
+            <a href="README.md">Documentation</a>
+        </p>
+        <p style="text-align: center; color: #666;">
+            © 2025 Emergent Spacetime Research Program
+        </p>
+    </footer>
+</body>
+</html>
