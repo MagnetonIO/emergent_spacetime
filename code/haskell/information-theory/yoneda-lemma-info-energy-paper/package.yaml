@@ -1,0 +1,79 @@
+name:                yoneda-info-energy
+version:             0.1.0.0
+github:              "yoneda-ai/yoneda-info-energy"
+license:             BSD3
+author:              "Matthew Long"
+maintainer:          "matthew@yoneda.ai"
+copyright:           "2025 Yoneda AI"
+
+extra-source-files:
+- README.md
+
+description:         Implementation of the Yoneda-theoretic approach to information-energy correspondence
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+- vector
+- mtl
+- transformers
+- lens
+- free
+- adjunctions
+- distributive
+- profunctors
+- kan-extensions
+- linear
+- hmatrix
+- statistics
+- random
+- QuickCheck
+
+default-extensions:
+- TypeFamilies
+- GADTs
+- RankNTypes
+- ConstraintKinds
+- DataKinds
+- KindSignatures
+- ScopedTypeVariables
+- FlexibleContexts
+- FlexibleInstances
+- MultiParamTypeClasses
+- FunctionalDependencies
+- DeriveFunctor
+- DeriveFoldable
+- DeriveTraversable
+- GeneralizedNewtypeDeriving
+- StandaloneDeriving
+- ViewPatterns
+- TupleSections
+- LambdaCase
+- EmptyCase
+
+library:
+  source-dirs: src
+
+executables:
+  yoneda-info-energy-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - yoneda-info-energy
+
+tests:
+  yoneda-info-energy-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - yoneda-info-energy
+    - hspec
+    - QuickCheck

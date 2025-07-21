@@ -1,0 +1,11 @@
+resolver: lts-21.25
+
+packages:
+- .
+
+extra-deps:
+- kan-extensions-5.2.5@sha256:4a74078a8db1e5bbeb14e3e17e3c8a5bb0fba4bc80b956b7700c0987ccc8e88a,2940
+- adjunctions-4.4.2@sha256:a13a18a32e3dd2d111b7ec8c69a82fc1bb3e4cc3558bbac4fa27b6052a8e8d02,3698
+- free-5.2@sha256:8bdc3c9c7a98ebb7cb2cc0d94bf347f369cecc6c14683bc92bd7dd8697aa0e0f,3208
+- profunctors-5.6.2@sha256:1f19e5db8b1d7771fb00bc67f1494b88312012a4bb0dc9f82bcf71382ae1de4f,2470
+- distributive-0.6.2.1@sha256:562bb2a10b573e61a8fac1f81a3b0dc14e887c6e2bbde89c7b502dd8e067e8f2,2996
