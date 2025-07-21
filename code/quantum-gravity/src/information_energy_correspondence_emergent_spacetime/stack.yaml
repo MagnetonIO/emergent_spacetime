@@ -1,0 +1,11 @@
+resolver: lts-21.25
+
+packages:
+- .
+
+extra-deps:
+- hmatrix-0.20.2@sha256:45db60232e3b1cf0cdbb5ce65e97ea48b866ea50e89c59b85267ed547e240c6f,4870
+
+flags:
+  hmatrix:
+    openblas: false

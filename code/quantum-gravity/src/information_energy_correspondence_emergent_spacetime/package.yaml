@@ -1,0 +1,49 @@
+name: information-energy-correspondence
+version: 0.1.0.0
+github: "magneton/emergent_spacetime"
+license: MIT
+author: "Matthew Long"
+maintainer: "mlong@yoneda.ai"
+copyright: "2024 Yoneda AI"
+
+description: |
+  Implementation of the Information-Energy Correspondence framework for
+  emergent spacetime, addressing fundamental problems in physics through
+  information-theoretic principles.
+
+dependencies:
+- base >= 4.7 && < 5
+- hmatrix >= 0.20
+- vector >= 0.12
+
+library:
+  source-dirs: .
+  exposed-modules:
+    - InformationEnergyCorrespondence
+    - CosmologicalApplications
+    - QuantumErrorCorrection
+    - ExperimentalPredictions
+
+executables:
+  information-energy-demo:
+    main: Main.hs
+    source-dirs: .
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - information-energy-correspondence
+
+tests:
+  information-energy-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - information-energy-correspondence
+    - hspec
+    - QuickCheck
