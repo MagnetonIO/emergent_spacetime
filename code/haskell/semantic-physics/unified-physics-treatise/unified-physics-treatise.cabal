@@ -1,0 +1,73 @@
+cabal-version:      3.0
+name:               unified-physics-treatise
+version:            0.1.0.0
+synopsis:           Haskell implementation of unified physics through information-theoretic constraints
+description:        This package implements the mathematical framework presented in the unified physics treatise,
+                    demonstrating how spacetime, matter, and fundamental forces emerge from information-theoretic
+                    constraint satisfaction.
+license:            MIT
+license-file:       LICENSE
+author:             Matthew Long, Claude Opus 4, ChatGPT 4o
+maintainer:         mlong@yoneda.ai
+category:           Physics, Mathematics
+build-type:         Simple
+extra-doc-files:    README.md
+
+common warnings
+    ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates
+                 -Wincomplete-uni-patterns -Wmissing-export-lists
+                 -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+library
+    import:           warnings
+    exposed-modules:  SemanticPhysics.Core
+                    , SemanticPhysics.Information
+                    , SemanticPhysics.Constraints
+                    , SemanticPhysics.EmergentSpacetime
+                    , SemanticPhysics.UnifiedForces
+                    , SemanticPhysics.QuantumInformation
+                    , SemanticPhysics.CategoryTheory
+                    , SemanticPhysics.HolographicCode
+                    , SemanticPhysics.TensorNetwork
+                    , SemanticPhysics.Experiments
+    build-depends:    base ^>=4.17.2.0
+                    , vector
+                    , mtl
+                    , transformers
+                    , containers
+                    , array
+                    , hmatrix
+                    , random
+                    , monad-par
+                    , deepseq
+                    , bytestring
+                    , text
+    hs-source-dirs:   src
+    default-language: GHC2021
+
+test-suite unified-physics-treatise-test
+    import:           warnings
+    default-language: GHC2021
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    other-modules:    SemanticPhysics.CoreSpec
+                    , SemanticPhysics.ConstraintsSpec
+                    , SemanticPhysics.EmergentSpacetimeSpec
+    build-depends:    base ^>=4.17.2.0
+                    , unified-physics-treatise
+                    , hspec
+                    , QuickCheck
+                    , vector
+                    , hmatrix
+
+executable unified-physics-demo
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:    base ^>=4.17.2.0
+                    , unified-physics-treatise
+                    , vector
+                    , hmatrix
+                    , text
+    hs-source-dirs:   app
+    default-language: GHC2021
