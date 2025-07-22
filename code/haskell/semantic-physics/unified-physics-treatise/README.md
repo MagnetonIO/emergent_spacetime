@@ -1,6 +1,6 @@
 # Unified Physics Treatise - Haskell Implementation
 
-This repository contains the Haskell implementation of the mathematical framework presented in "Unification of Physics Through Information-Theoretic Constraint Satisfaction: A Proof-As-Code Approach to Fundamental Reality".
+This repository contains the Haskell implementation of the mathematical framework presented in "Unification of Physics Through Information-Theoretic Constraint Satisfaction: A Proof-As-Code Framework".
 
 ## Overview
 
