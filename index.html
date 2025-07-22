@@ -20,8 +20,13 @@
             color: #333;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             background-color: #f8f9fa;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding: 2rem;
+            }
         }
         h1, h2, h3 {
             color: #2c3e50;
@@ -29,34 +34,65 @@
         h1 {
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 2.5rem;
+            font-size: 2rem;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
         }
         .subtitle {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 3rem;
+            }
         }
         .section {
             background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        @media (min-width: 768px) {
+            .section {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
         .equation-box {
             background: #f0f7ff;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            padding: 1rem;
+            margin: 1rem 0;
             border-radius: 6px;
             text-align: center;
             border-left: 4px solid #3498db;
+            overflow-x: auto;
+        }
+        @media (min-width: 768px) {
+            .equation-box {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
         }
         .paper-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (min-width: 768px) {
+            .paper-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
         }
         .paper-card {
             background: #f8f9fa;
@@ -84,25 +120,43 @@
         .code-section {
             background: #2c3e50;
             color: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 8px;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+        }
+        @media (min-width: 768px) {
+            .code-section {
+                padding: 2rem;
+                margin: 2rem 0;
+            }
         }
         .code-section h3 {
             color: white;
         }
         .code-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             flex-wrap: wrap;
+        }
+        @media (min-width: 768px) {
+            .code-links {
+                gap: 2rem;
+            }
         }
         .code-link {
             background: #34495e;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1rem;
             border-radius: 6px;
             color: white;
             text-decoration: none;
             transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .code-link {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
         }
         .code-link:hover {
             background: #3498db;
@@ -110,18 +164,28 @@
         .nav {
             background: white;
             padding: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        @media (min-width: 768px) {
+            .nav {
+                margin-bottom: 2rem;
+            }
         }
         .nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+        }
+        @media (min-width: 768px) {
+            .nav ul {
+                gap: 2rem;
+            }
         }
         .nav a {
             color: #2c3e50;
@@ -171,6 +235,18 @@
         <div class="highlight">
             <strong>Latest Development:</strong> Complete unification of physics achieved through the Unified Constraint Equation (UCE), demonstrating that all forces and spacetime emerge from information-theoretic constraint satisfaction. See our <a href="papers/foundations/compiled/unified-physics-treatise.pdf">latest treatise</a> and <a href="code/haskell/semantic-physics/unified-physics-treatise/">Haskell implementation</a>.
         </div>
+    </section>
+
+    <section class="section" style="background: #e8f5e9;">
+        <h2>🔬 Latest Research (January 2025)</h2>
+        <p>New papers demonstrating unified physics through information-theoretic principles:</p>
+        <ul style="list-style: none; padding-left: 0;">
+            <li>📄 <a href="papers/foundations/compiled/unified-physics-treatise.pdf">Unified Physics Treatise</a> - Complete unification via constraint satisfaction</li>
+            <li>📄 <a href="papers/quantum-gravity/compiled/information_energy_correspondence_emergent_spacetime.pdf">Information-Energy Correspondence</a> - Spacetime emergence framework</li>
+            <li>📄 <a href="papers/quantum-gravity/compiled/spectral_information_formalism.pdf">Spectral Information Formalism</a> - Spectral methods in quantum gravity</li>
+            <li>📄 <a href="papers/information-theory/compiled/yoneda-lemma-info-energy-paper.pdf">Yoneda Lemma & Information-Energy</a> - Category theory foundations</li>
+            <li>💻 <a href="code/haskell/semantic-physics/unified-physics-treatise/">Unified Physics Haskell Framework</a> - Complete implementation</li>
+        </ul>
     </section>
 
     <section id="foundations" class="section">
@@ -230,6 +306,16 @@
                 <p>Resolution through quantum error correction and holographic principles.</p>
                 <a href="papers/quantum-gravity/compiled/black_hole_information_paradox.pdf">Read Paper →</a>
             </div>
+            <div class="paper-card">
+                <h4>Information-Energy Correspondence</h4>
+                <p>Emergent spacetime from information-energy correspondence principles.</p>
+                <a href="papers/quantum-gravity/compiled/information_energy_correspondence_emergent_spacetime.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Spectral Information Formalism</h4>
+                <p>Spectral approach to quantum information and emergent geometry.</p>
+                <a href="papers/quantum-gravity/compiled/spectral_information_formalism.pdf">Read Paper →</a>
+            </div>
         </div>
 
         <h3>Information Theory Foundations</h3>
@@ -253,6 +339,11 @@
                 <h4>QEC and Light Speed</h4>
                 <p>Quantum error correction constraints and relativistic invariance.</p>
                 <a href="papers/information-theory/compiled/qec_light_speed_paper.pdf">Read Paper →</a>
+            </div>
+            <div class="paper-card">
+                <h4>Yoneda Lemma & Information-Energy</h4>
+                <p>Category-theoretic foundations of information-energy correspondence.</p>
+                <a href="papers/information-theory/compiled/yoneda-lemma-info-energy-paper.pdf">Read Paper →</a>
             </div>
         </div>
 
@@ -299,6 +390,9 @@
                 <a href="code/haskell/black_hole_info.hs" class="code-link">Black Hole Information</a>
                 <a href="code/haskell/emergent_gauge.hs" class="code-link">Emergent Gauge Theory</a>
                 <a href="code/haskell/semantic-physics/unified-physics-treatise/" class="code-link">Unified Physics Framework</a>
+                <a href="code/haskell/information-theory/yoneda-lemma-info-energy-paper/" class="code-link">Yoneda Information-Energy</a>
+                <a href="code/haskell/quantum-gravity/spectral-information/" class="code-link">Spectral Information</a>
+                <a href="code/haskell/quantum-gravity/info-energy-correspondence/" class="code-link">Info-Energy Correspondence</a>
                 <a href="code/haskell/" class="code-link">View All Haskell Code →</a>
             </div>
         </div>
