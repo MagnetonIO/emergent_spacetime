@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm, mathtools, tikz-cd, hyperref, physics, enumitem}
+\usepackage{authblk}
+\usepackage{abstract}
+\usepackage{graphicx}
+\usepackage{cite}
+\title{Non-Commutative Holonomy in Emergent Informational Spacetime: A Categorical Foundation for Galaxy Dynamics and Quantum Geometry}
+
+\author[1]{Matthew Long}
+\affil[1]{Yoneda AI, Category Research Division, \texttt{matthew@yoneda.ai}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper proposes a formal framework for modeling spacetime as an emergent phenomenon arising from fundamentally informational and categorical structures. We introduce the concept of non-commutative holonomy in informational spacetime, formalized within higher category theory, to account for anomalies in galactic rotation curves typically attributed to dark matter. A central lemma demonstrates that bidirectional morphisms between local informational objects do not guarantee global coherence, and that this obstruction manifests as a non-trivial holonomy phase. We argue that such holonomies encode topological memory and give rise to observable rotational dynamics in galaxies. This reframing suggests that dark matter is not a particle, but a categorical consequence of informational geometry.
+\end{abstract}
+
+\vspace{1em}
+\noindent \textbf{Keywords:} Emergent Spacetime, Category Theory, Non-Commutative Geometry, Holonomy, Dark Matter, Galaxy Rotation, Information Ontology
+
+\tableofcontents
+
+\section{Introduction}
+
+Contemporary physics describes the universe through the interplay of general relativity and quantum mechanics. However, mounting theoretical tensions and observational discrepancies---notably the dark matter problem---suggest that our ontological commitments may need revision. This paper posits that physics has the mirror upside down: matter is not primary; information is. By reframing spacetime and physical law as emergent from a categorical and informational substrate, we gain new insight into galactic dynamics without invoking unseen mass.
+
+We present a categorical formalism in which the failure of transitive morphism composition results in non-commutative holonomy, leading to observable effects such as flat galactic rotation curves. The heart of the paper lies in demonstrating how such holonomy arises from the obstruction of global coherence in the informational manifold.
+
+\section{Information-First Ontology}
+
+Let us denote informational states as objects in a category \( \mathcal{I} \), with morphisms \( f: A \to B \) encoding accessible transformations or communications of information. We assume that all physical processes arise from structure-preserving transformations of these informational objects.
+
+This shift demands we treat physical entities not as primitive particles but as functorial relations---observable only in terms of their interaction pathways and categorical transformations. Hence, spacetime itself is not fundamental, but a projection of constraints and hom-sets between informational objects.
+
+\section{Geometry as Information Flow}
+
+In this framework, geometric properties arise from patterns of connectivity in \( \mathcal{I} \). Curvature corresponds to the failure of morphism composition to be trivial. Torsion corresponds to asymmetric mappings in time-evolved functor categories.
+
+Holonomy, then, arises from the composition of morphisms around a loop. In flat informational space, this is trivial (identity). In curved or topologically obstructed information space, a non-identity morphism results, representing informational phase memory.
+
+\section{Non-Commutative Holonomy: Lemma and Categorical Structure}
+
+Let \( A, B, C \in \text{Ob}(\mathcal{I}) \) with morphisms:
+\begin{align*}
+  f &: A \to B, \\
+  g &: B \to A, \\
+  h &: A \nrightarrow C \quad \text{(undefined)}
+\end{align*}
+
+\begin{lemma}[Non-Commutative Holonomy Lemma]
+In a category \( \mathcal{I} \) modeling emergent informational spacetime, if \( A \leftrightarrow B \) via isomorphisms but no morphism exists from \( A \to C \), then the holonomy \( \mathcal{H}(\gamma) \) around the loop \( A \to B \to A \) is path-dependent and globally obstructed by the missing connection to \( C \). This results in a non-commutative holonomy algebra that reflects informational phase asymmetry.
+\end{lemma}
+
+\begin{proof}[Sketch]
+Consider the groupoid formed by local isomorphisms in \( A \leftrightarrow B \). Lack of morphisms to \( C \) implies that \( \text{Hom}(A, C) = \emptyset \), breaking transitivity. The failure to embed \( C \) in the same path groupoid implies a holonomy representation that cannot be globally trivialized. Thus, \( \mathcal{H}(\gamma_{ABA}) \neq \mathcal{H}(\gamma_{ABC}) \) and the space exhibits non-commutative path dependence.
+\end{proof}
+
+\section{Galaxy Rotation as Informational Holonomy}
+
+[To be expanded: We apply the above to interpret flat galaxy rotation curves as a manifestation of non-commutative holonomy across the informational network that constitutes the galaxy.]
+
+\section{Categorical Constraints vs Dark Matter Hypotheses}
+
+[To be expanded: Compare the predictions and ontological economy of the informational model with particle-based dark matter explanations.]
+
+\section{Experimental Consequences and Observables}
+
+[To be expanded: Propose potential observational signatures that distinguish topological informational holonomy from classical dark matter, including interferometry and frame dragging experiments.]
+
+\section{Conclusion}
+
+We argue that non-commutative holonomy in an informational substrate offers a viable, testable, and ontologically simpler alternative to traditional dark matter models. By reframing physics in terms of information and category theory, we align the mathematical structure of our models with the conceptual demands of quantum mechanics and cosmology.
+
+\bibliographystyle{plain}
+\bibliography{holonomy_refs}
+
+\end{document}

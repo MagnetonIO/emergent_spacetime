@@ -1,0 +1,52 @@
+cabal-version:      3.0
+name:               non-commutative-holonomy-emergent-spacetime
+version:            0.1.0.0
+synopsis:           Non-Commutative Holonomy in Emergent Informational Spacetime
+description:        A categorical framework for modeling spacetime as emergent from informational structures,
+                    implementing non-commutative holonomy to explain galaxy dynamics without dark matter.
+license:            MIT
+author:             Matthew Long
+maintainer:         matthew@yoneda.ai
+category:           Physics, Mathematics
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  InformationalSpacetime.Category
+                      InformationalSpacetime.Holonomy
+                      InformationalSpacetime.Galaxy
+                      InformationalSpacetime.Geometry
+    build-depends:    base ^>=4.18.0.0,
+                      containers,
+                      vector,
+                      matrix,
+                      hmatrix,
+                      mtl,
+                      transformers
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+test-suite spec
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    other-modules:    CategorySpec
+                      HolonomySpec
+    build-depends:    base ^>=4.18.0.0,
+                      non-commutative-holonomy-emergent-spacetime,
+                      hspec,
+                      QuickCheck
+    build-tool-depends: hspec-discover:hspec-discover == 2.*
+
+executable galaxy-simulation
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:    base ^>=4.18.0.0,
+                      non-commutative-holonomy-emergent-spacetime
+    hs-source-dirs:   examples
+    default-language: Haskell2010
