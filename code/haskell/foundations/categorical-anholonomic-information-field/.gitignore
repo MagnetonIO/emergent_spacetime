@@ -1,0 +1,17 @@
+.stack-work/
+*~
+*.cabal
+dist-newstyle/
+.ghc.environment.*
+*.hi
+*.o
+*.prof
+*.aux
+*.hp
+*.eventlog
+.cabal-sandbox/
+cabal.sandbox.config
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghci

@@ -1,0 +1,71 @@
+name:                categorical-anholonomic-information-field
+version:             0.1.0.0
+github:              "githubuser/categorical-anholonomic-information-field"
+license:             BSD3
+author:              "Matthew Long, Claude Opus 4, ChatGPT 4o"
+maintainer:          "example@example.com"
+copyright:           "2025 Authors"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/githubuser/categorical-anholonomic-information-field#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+- mtl
+- vector
+- matrix
+- linear
+- lens
+- free
+- profunctors
+- kan-extensions
+- hmatrix
+- random
+
+default-extensions:
+- OverloadedStrings
+- TypeFamilies
+- GADTs
+- DataKinds
+- KindSignatures
+- RankNTypes
+- FlexibleContexts
+- FlexibleInstances
+- MultiParamTypeClasses
+- FunctionalDependencies
+- ConstraintKinds
+- ScopedTypeVariables
+- DeriveFunctor
+- DeriveFoldable
+- DeriveTraversable
+- GeneralizedNewtypeDeriving
+
+library:
+  source-dirs: src
+
+executables:
+  caif-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - categorical-anholonomic-information-field
+
+tests:
+  caif-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - categorical-anholonomic-information-field
+    - hspec
+    - QuickCheck
