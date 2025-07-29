@@ -1,0 +1,118 @@
+name:                functorial-physics
+version:             0.1.0.0
+github:              "yoneda-ai/functorial-physics"
+license:             BSD3
+author:              "Matthew Long, Claude Opus 4, ChatGPT 4o"
+maintainer:          "info@yoneda.ai"
+copyright:           "2025 Yoneda AI"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+synopsis:            Functorial Physics and Information-Theoretic Foundations
+category:            Physics
+
+description:         |
+  Implementation of the theoretical framework from "Functorial Physics and 
+  Information-Theoretic Foundations", demonstrating how physical laws emerge 
+  as consistency conditions for information-theoretic structures at fundamental scales.
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+- vector
+- matrix
+- hmatrix
+- mtl
+- transformers
+- lens
+- linear
+- free
+- profunctors
+- adjunctions
+- distributive
+- comonad
+- kan-extensions
+- categories
+- semigroups
+- groups
+- semigroupoids
+- bifunctors
+- contravariant
+- tagged
+- void
+- StateVar
+- random
+- statistics
+- monad-par
+- parallel
+- deepseq
+- criterion
+- QuickCheck
+- tasty
+- tasty-quickcheck
+- tasty-hunit
+
+library:
+  source-dirs: src
+
+executables:
+  functorial-physics-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - functorial-physics
+
+tests:
+  functorial-physics-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - functorial-physics
+
+benchmarks:
+  functorial-physics-bench:
+    main:                Main.hs
+    source-dirs:         benchmarks
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - functorial-physics
+    - criterion
+
+default-extensions:
+  - ConstraintKinds
+  - DataKinds
+  - DeriveGeneric
+  - DeriveFunctor
+  - DeriveFoldable
+  - DeriveTraversable
+  - FlexibleContexts
+  - FlexibleInstances
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - InstanceSigs
+  - KindSignatures
+  - LambdaCase
+  - MultiParamTypeClasses
+  - OverloadedStrings
+  - PolyKinds
+  - RankNTypes
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - TypeOperators
+  - ViewPatterns
