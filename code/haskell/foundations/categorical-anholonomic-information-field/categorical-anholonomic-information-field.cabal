@@ -1,0 +1,48 @@
+cabal-version:      3.0
+name:               categorical-anholonomic-information-field
+version:            0.1.0.0
+synopsis:           Categorical framework for anholonomic information fields
+description:        Implementation of categorical structures for emergent spacetime through anholonomic information fields
+license:            MIT
+author:             Emergent Spacetime Theory
+maintainer:         emergent@spacetime.theory
+category:           Physics, Mathematics
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  
+        CategoricalAnholonomic.Core
+        CategoricalAnholonomic.InfoCategory
+        CategoricalAnholonomic.Holonomy
+        CategoricalAnholonomic.AnholonomicField
+        CategoricalAnholonomic.Metric
+        CategoricalAnholonomic.Quantum
+        CategoricalAnholonomic.Computation
+    build-depends:    
+        base ^>=4.17.0.0,
+        containers ^>=0.6.5.1,
+        vector ^>=0.13.0.0,
+        matrix ^>=0.3.6.1,
+        hmatrix ^>=0.20.2,
+        mtl ^>=2.2.2,
+        transformers ^>=0.5.6.2,
+        lens ^>=5.2.3,
+        linear ^>=1.22
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+test-suite categorical-anholonomic-test
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.17.0.0,
+        categorical-anholonomic-information-field,
+        hspec ^>=2.11.4,
+        QuickCheck ^>=2.14.3
