@@ -1,0 +1,55 @@
+cabal-version:      3.0
+name:               categorical-gauge-time-foundations
+version:            0.1.0.0
+synopsis:           Implementation of categorical foundations for gauge-time and relational timelessness
+description:        A Haskell implementation of the mathematical framework presented in 
+                    "Categorical Foundations of Gauge-Time and Relational Timelessness"
+license:            MIT
+author:             Matthew Long, Claude Opus 4.1, ChatGPT 5
+maintainer:         yonedaai@example.com
+category:           Physics, Mathematics
+build-type:         Simple
+
+library
+    exposed-modules:  
+        Category.Base
+        Category.GaugeTime
+        Category.Relational
+        Category.Constraint
+        Category.HigherGauge
+        Category.Functors
+        Physics.GaugeTheory
+        Physics.QuantumMechanics
+        Physics.WheelerDeWitt
+        Physics.PageWootters
+        Physics.Observables
+        Physics.Decoherence
+        Applications.QuantumGravity
+        Applications.Cosmology
+        Applications.Experimental
+
+    build-depends:    
+        base ^>=4.18.0.0,
+        containers >= 0.6 && < 0.7,
+        vector >= 0.12 && < 0.14,
+        mtl >= 2.2 && < 2.4,
+        transformers >= 0.5 && < 0.7,
+        lens >= 5.0 && < 5.3,
+        linear >= 1.21 && < 1.23,
+        hmatrix >= 0.20 && < 0.21
+
+    hs-source-dirs:   src
+    default-language: Haskell2010
+    ghc-options:      -Wall -Wcompat -Widentities -Wincomplete-record-updates
+                      -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
+
+test-suite categorical-gauge-time-tests
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    build-depends:    
+        base ^>=4.18.0.0,
+        categorical-gauge-time-foundations,
+        hspec >= 2.10 && < 2.12,
+        QuickCheck >= 2.14 && < 2.15
