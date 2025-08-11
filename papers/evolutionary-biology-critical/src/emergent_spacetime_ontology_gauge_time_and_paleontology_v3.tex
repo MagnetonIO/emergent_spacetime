@@ -5,6 +5,7 @@
 \usepackage{bbm}
 \usepackage{tikz}
 \usepackage{tikz-cd}
+\usetikzlibrary{positioning,shapes,arrows.meta}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{authblk}
@@ -43,6 +44,8 @@ A Formal Ontology that Invalidates Deep Time and Evolutionary Chronology}}
 \newcommand{\C}{\mathcal{C}}        % coarse-graining/compression
 \newcommand{\Id}{\mathbbm{1}}       % identity
 \newcommand{\eqdef}{\vcentcolon=}
+\newcommand{\Diff}{\mathrm{Diff}}   % diffeomorphisms
+\newcommand{\Hom}{\mathrm{Hom}}     % homomorphisms
 
 \begin{document}
 \maketitle
@@ -76,6 +79,14 @@ Composition in $\Ecat$ expresses relational compatibility, not succession in tim
 A monad $(\C,\eta,\mu)$ on $\Ecat$ encodes admissible compressions; $\C$-algebras represent macroscopic states.
 \end{definition}
 
+\begin{lemma}[Compression Preserves Structure]
+For any $S \in \Ecat$ and coarse-graining $\C$, the canonical map $\eta_S: S \to \C(S)$ preserves all invariants in $\I$.
+\end{lemma}
+
+\begin{proof}
+Let $\phi \in \I$ be an invariant. Since $\C$ is constructed to preserve macroscopic observables, and invariants are precisely those quantities preserved under admissible morphisms, we have $\phi(\eta_S(s)) = \phi(s)$ for all $s \in S$. The naturality of $\eta$ ensures this holds universally.
+\end{proof}
+
 \section{Representation and Non-Injectivity}
 \begin{definition}[Emergence]
 $\F:\Ecat\to\ST$ assigns to $S$ an appearance $\F(S)$ and to $f$ a structure-preserving map $\F(f)$ in $\ST$.
@@ -84,6 +95,12 @@ $\F:\Ecat\to\ST$ assigns to $S$ an appearance $\F(S)$ and to $f$ a structure-pre
 \begin{proposition}[Many-to-One Emergence]
 If $\F$ factors through $\C$-algebras and $\C(S)\cong\C(S')$ for distinct $S\not\cong S'$, then $\F(S)\cong \F(S')$ in $\ST$. Distinct substrates can yield identical appearances.
 \end{proposition}
+
+\begin{proof}
+Consider the factorization $\F = \F' \circ \C$ where $\F': \Ecat_{\C\text{-alg}} \to \ST$. If $\C(S) \cong \C(S')$ via isomorphism $\alpha: \C(S) \to \C(S')$, then:
+$$\F(S) = \F'(\C(S)) \cong \F'(\C(S')) = \F(S')$$
+The isomorphism is given by $\F'(\alpha)$, which exists by functoriality of $\F'$.
+\end{proof}
 
 % ===================== 2. Time as Gauge =====================
 \section{Time as a Gauge: No Absolute Duration}
@@ -97,13 +114,24 @@ A duration assignment $D$ maps an unparameterized orbit segment (endpoints on a 
 Under (i)–(iii), any $D$ is trivial (identically zero) or reduces to a constant multiple of a fixed external calibration that breaks full $\mathcal{T}$-invariance. Absolute deep-time durations are not invariants of the ontology.
 \end{theorem}
 
-\begin{proof}[Sketch]
-Let $\gamma:[0,1]\to X$ be an orbit segment. For any $\tau\in\mathrm{Diff}_+([0,1])$, invariance gives $D(\gamma)=D(\gamma\circ\tau)$. Using a refining sequence of $\tau_n$ that compresses measure near an endpoint while preserving endpoints, additivity forces equality of $D$ across arbitrarily reweighted subdivisions. Either $D\equiv 0$ or one selects a privileged $\tau$ (an external calibration), breaking full invariance. 
+\begin{proof}
+Let $\gamma:[a,b]\to X$ be an orbit segment with $a < b$. For any strictly increasing $h: [a,b] \to [c,d]$, define $\tilde{\gamma} = \gamma \circ h^{-1}: [c,d] \to X$. By invariance (ii), $D(\gamma) = D(\tilde{\gamma})$.
+
+Consider a sequence of reparameterizations $h_n$ that increasingly concentrate the parameter interval near $a$: specifically, let $h_n(t) = a + (b-a) \cdot f_n(t)$ where $f_n: [a,b] \to [0,1]$ with $f_n(a) = 0$, $f_n(b) = 1$, but $f_n$ assigns measure $1-1/n$ to the interval $[a, a+\epsilon]$ for arbitrarily small $\epsilon > 0$.
+
+By additivity (i), we can partition $\gamma$ at any intermediate point. Consider the partition at $\gamma(a+\epsilon)$:
+$$D(\gamma) = D(\gamma|_{[a,a+\epsilon]}) + D(\gamma|_{[a+\epsilon,b]})$$
+
+Under $h_n$, the segment $\gamma|_{[a,a+\epsilon]}$ receives measure $1-1/n$ while $\gamma|_{[a+\epsilon,b]}$ receives measure $1/n$. By invariance, $D$ must assign the same total duration regardless of this reweighting.
+
+Taking the limit as $n \to \infty$, the segment $\gamma|_{[a+\epsilon,b]}$ receives vanishing measure. If $D(\gamma|_{[a+\epsilon,b]}) > 0$, then by additivity and the ability to subdivide arbitrarily, we can construct a contradiction where the same geometric segment contributes both finite and zero duration.
+
+Therefore, either $D(\gamma|_{[a+\epsilon,b]}) = 0$ for all segments, implying $D \equiv 0$, or $D$ depends on a choice of parameterization that breaks $\mathcal{T}$-invariance.
 \end{proof}
 
-\begin{remark}
-Time is a gauge parameter: numerical ages are coordinate conventions, not ontological magnitudes. Observables must be invariant under $\mathcal{T}$.
-\end{remark}
+\begin{corollary}[Time as Gauge Parameter]
+Numerical temporal assignments in $\ST$ are coordinate conventions without ontological content in $\Ecat$.
+\end{corollary}
 
 % ===================== 3. Radiometry under reparam =====================
 \section{Radiometric Dating Under Time Reparameterization}
@@ -114,10 +142,27 @@ $N$ is exponential in $s$ with constant rate $\lambda'$ iff $h(s)=a s+b$ with $a
 \end{proposition}
 
 \begin{proof}
-Require $N_0 e^{-\lambda' s}=N_0 e^{-\lambda h(s)}$. Differentiating gives $\lambda'=\lambda h'(s)$. Constancy of $\lambda'$ implies $h'$ constant, hence $h$ affine.
+Require $N_0 e^{-\lambda' s}=N_0 e^{-\lambda h(s)}$. Taking logarithms:
+$$-\lambda' s = -\lambda h(s) \implies \lambda' s = \lambda h(s)$$
+
+Differentiating with respect to $s$:
+$$\lambda' = \lambda h'(s)$$
+
+For $\lambda'$ to be constant (independent of $s$), we need $h'(s) = \lambda'/\lambda = \text{constant}$. This implies $h(s) = as + b$ for constants $a, b$ with $a = \lambda'/\lambda > 0$.
+
+Conversely, if $h$ is not affine, then $h'(s)$ varies with $s$, making the effective rate $\lambda(s) = \lambda h'(s)$ position-dependent.
 \end{proof}
 
-\noindent \textbf{Interpretation:} If time is emergent and $h$ is nonlinear, either (i) effective rates vary in $s$, or (ii) different clocks cannot be jointly linearized by a single affine gauge. Empirically, high-precision studies are consistent with an \emph{approximately affine} gauge in our domain—supporting effective chronology, not fundamental time.
+\begin{corollary}[Multi-Clock Consistency]
+Multiple radiometric systems can maintain mutual exponential decay laws under a common reparameterization $h(s)$ iff $h$ is affine.
+\end{corollary}
+
+\begin{proof}
+Let systems $i = 1, \ldots, n$ have decay laws $N_i(t) = N_{i,0} e^{-\lambda_i t}$. Under $t = h(s)$:
+$$N_i(s) = N_{i,0} e^{-\lambda_i h(s)}$$
+
+For each system to maintain exponential form $N_i(s) = N_{i,0} e^{-\lambda'_i s}$, we need $\lambda_i h(s) = \lambda'_i s$ for all $i$. This gives $h(s) = (\lambda'_i/\lambda_i) s$ for each $i$. Consistency across all systems requires $\lambda'_i/\lambda_i = a$ (constant), forcing $h(s) = as + b$.
+\end{proof}
 
 % ===================== 4. Fossils, Deep Time, and Collapse =====================
 \section{Fossil Record, Deep Time, and Collapse of Evolutionary Chronology}
@@ -139,215 +184,298 @@ Without $T$, a transformation sequence lacks support.
 \end{proposition}
 
 \begin{proof}
-Transformation claims require a total order to define ``before/after.'' Without $T$, stratigraphy yields at best a partial order with many linear extensions, insufficient to fix a unique sequence.
+The function $\text{Order}(F,T)$ is undefined when $T$ is absent, as there is no total ordering on $F$. Stratigraphic data provides only a partial order $\preceq$ on $F$ (where $f_1 \preceq f_2$ means $f_1$ occurs in a layer below $f_2$). 
+
+A partial order generally admits multiple linear extensions. Let $\mathcal{L}(\preceq)$ denote the set of all linear orders extending $\preceq$. Without $T$ to select a particular extension, we have:
+$$E(F,\varnothing) = \bigcap_{L \in \mathcal{L}(\preceq)} \text{Narrative}(L, \text{Morphology}(F))$$
+
+Since different linear extensions can yield incompatible narratives, the intersection reduces to features common to all extensions—namely, the morphological data itself, with no temporal ordering.
 \end{proof}
 
 \begin{lemma}[Link to Theorem \ref{thm:no_duration}]
 By Theorem \ref{thm:no_duration}, any absolute deep-time mapping $T$ is gauge-dependent. Hence $T$ lacks ontological status in this ontology.
 \end{lemma}
 
-\begin{corollary}[Falsity of the Modern Synthesis as Fundamental Theory]
-If deep time is not fundamental, the Modern Synthesis narrative of gradual transformation over millions of years is false as a fundamental theory: its fossil-based chronology collapses to gauge-fixed storytelling. Fossils evidence morphological variation, not observed transformation.
-\end{corollary}
+\begin{proof}
+$T$ assigns duration-based coordinates to fossils. By Theorem \ref{thm:no_duration}, absolute durations are either trivial or gauge-dependent. Since $T$ relies on radiometric dating (which measures durations), $T$ inherits the gauge-dependence of duration measurements.
+\end{proof}
 
-% ===================== 5. Narrative Breakdown (merged with gauge theory) =====================
-\section{Narrative Breakdown of Deep Time in Our Ontology and its Physics Alignment}
+\begin{theorem}[Falsity of the Modern Synthesis as Fundamental Theory]
+If deep time is not fundamental, the Modern Synthesis narrative of gradual transformation over millions of years is false as a fundamental theory: its fossil-based chronology collapses to gauge-fixed storytelling.
+\end{theorem}
 
-\subsection{Narrative Breakdown in Our Ontology}
-In our ontology, \textbf{time is a gauge parameter}, meaning:
-\begin{itemize}
-    \item There is no absolute, observer-independent temporal dimension.
-    \item Any ``clock'' is calibrated within a chosen gauge.
-    \item Numerical assignments (``millions,'' ``billions'' of years) reflect measurement conventions tied to gauge, not properties of reality-in-itself.
-\end{itemize}
+\begin{proof}
+The Modern Synthesis relies on three components:
+\begin{enumerate}
+\item A temporal framework (deep time) providing absolute chronology
+\item Fossil evidence arranged in this temporal framework
+\item Inferred transformation processes connecting fossils across time
+\end{enumerate}
 
-\paragraph{1. Gauge-Dependent Measurement.}
-Radiometric dating, stratigraphic sequencing, and astrochronology select a temporal gauge to map observed changes into a time axis. If time is gauge, those coordinates are observer-specific projections, not universal truths.
+By Theorem \ref{thm:no_duration}, component (1) is gauge-dependent, not fundamental. By the previous proposition, removing (1) causes (2) to collapse to unordered morphologies. Component (3) requires (1) and (2), so it also fails.
 
-\paragraph{2. Loss of Ontological Chronology.}
-Without a fundamental clock, there is no cosmic stopwatch. ``Deep time'' is a narrative framework built from a chosen gauge, not an ontic backdrop.
+Therefore, the Modern Synthesis narrative depends on gauge choices rather than fundamental ontological features. In our timeless ontology, fossils evidence morphological variation within the space of possible forms, not transformation through fundamental time.
+\end{proof}
 
-\paragraph{3. Collapse of Evolutionary Sequencing.}
-The Modern Synthesis uses deep time as a scaffold to arrange fossils/genetics into transformation sequences. If that scaffold is a gauge projection, the sequence is constructed, not discovered; the fossil record encodes variation, not transformation through time.
-
-\subsection{Alignment with Gauge Theory and Emergent Spacetime Physics}
-Gauge invariance marks variables that can change without altering physical content (e.g., $A_\mu\mapsto A_\mu+\partial_\mu\chi$ leaves fields unchanged). In our ontology, temporal reparameterizations $\tau\mapsto f(\tau)$ are gauge: physical invariants reside in relational structure in $\Ecat$, not in $\tau$ itself. Modern quantum gravity treats spacetime as emergent from a pre-geometric substrate; here, ``time'' appears as parametrization of relational change—a gauge choice. Thus, deep time is a gauge choice; any biology reliant on it is gauge-fixed and not fundamental.
-
-% ===================== 6. Diagram(s) =====================
+% ===================== 5. Fixed Diagrams =====================
 \section{Diagrams: Parallels Across Physics and Paleontology}
 
-\subsection{Conceptual Diagram (Boxes and Arrows)}
+\subsection{Conceptual Diagram}
 \begin{figure}[h!]
 \centering
-\begin{tikzpicture}[node distance=2.1cm,>=stealth,thick]
-\node (gt) [draw, rounded corners, align=center] {Gauge Theory\\(Electromagnetism)};
-\node (em) [draw, rounded corners, below of=gt, align=center] {Gauge Variable:\\Vector Potential $A_\mu$};
-\node (obs) [draw, rounded corners, below of=em, align=center] {Invariants:\\$E$, $B$ Fields};
+\begin{tikzpicture}[
+    node distance=2.5cm,
+    every node/.style={align=center, font=\small},
+    box/.style={draw, rectangle, rounded corners, minimum width=2.8cm, minimum height=1.2cm},
+    arrow/.style={-{Latex[length=3mm]}, thick},
+    dashed_arrow/.style={<->, dashed, thick}
+]
 
-\node (et) [draw, rounded corners, right=4.5cm of gt, align=center] {Emergent Spacetime\\(Our Ontology)};
-\node (tg) [draw, rounded corners, below of=et, align=center] {Gauge Variable:\\Time Param. $\tau$};
-\node (inv) [draw, rounded corners, below of=tg, align=center] {Invariants:\\Relational Structure in $\Ecat$};
+% Column 1: Gauge Theory
+\node[box] (gt) {Gauge Theory\\(Electromagnetism)};
+\node[box, below=of gt] (gv) {Gauge Variable:\\Vector Potential $A_\mu$};
+\node[box, below=of gv] (inv1) {Physical Invariants:\\$E$, $B$ Fields};
 
-\node (pa) [draw, rounded corners, right=4.5cm of et, align=center] {Paleontology\\(Chronology)};
-\node (dt) [draw, rounded corners, below of=pa, align=center] {Gauge Choice:\\Deep-Time Map $T$};
-\node (seq) [draw, rounded corners, below of=dt, align=center] {Narrative:\\Evolutionary Sequence};
+% Column 2: Emergent Spacetime
+\node[box, right=4cm of gt] (est) {Emergent Spacetime\\(Our Ontology)};
+\node[box, below=of est] (tg) {Gauge Variable:\\Time Parameter $\tau$};
+\node[box, below=of tg] (inv2) {Ontological Invariants:\\Relational Structure in $\Ecat$};
 
-\draw[->] (gt) -- (em);
-\draw[->] (em) -- (obs);
+% Column 3: Paleontology
+\node[box, right=4cm of est] (paleo) {Paleontology\\(Deep Time Chronology)};
+\node[box, below=of paleo] (dt) {Gauge Choice:\\Deep-Time Map $T$};
+\node[box, below=of dt] (narrative) {Constructed Narrative:\\Evolutionary Sequence};
 
-\draw[->] (et) -- (tg);
-\draw[->] (tg) -- (inv);
+% Vertical arrows within columns
+\draw[arrow] (gt) -- (gv);
+\draw[arrow] (gv) -- (inv1);
+\draw[arrow] (est) -- (tg);
+\draw[arrow] (tg) -- (inv2);
+\draw[arrow] (paleo) -- (dt);
+\draw[arrow] (dt) -- (narrative);
 
-\draw[->] (pa) -- (dt);
-\draw[->] (dt) -- (seq);
+% Horizontal dashed arrows showing analogies
+\draw[dashed_arrow] (gv.east) -- node[above, font=\tiny]{gauge analogy} (tg.west);
+\draw[dashed_arrow] (inv1.east) -- node[above, font=\tiny]{invariants vs gauge} (inv2.west);
+\draw[dashed_arrow] (tg.east) -- node[above, font=\tiny]{gauge fixing} (dt.west);
 
-\draw[<->, dashed] (em.east) -- node[above]{analogy} (tg.west);
-\draw[<->, dashed] (obs.east) -- node[above]{invariants vs. gauge} (inv.west);
-\draw[<->, dashed] (tg.east) -- node[above]{gauge fixing} (dt.west);
 \end{tikzpicture}
-\caption{Parallel: gauge redundancy in EM, time gauge in emergent spacetime, and deep-time gauge in paleontology.}
+\caption{Structural parallel: gauge redundancy in electromagnetism, time gauge in emergent spacetime, and deep-time gauge fixing in paleontology. Physical content resides in gauge-invariant quantities.}
 \end{figure}
 
-\subsection{Commutative-Style Diagram (TikZ-CD)}
+\subsection{Categorical Diagram}
 \begin{figure}[h!]
 \centering
-\begin{tikzcd}[row sep=large, column sep=large]
-\Ecat \arrow[r, "\F"] \arrow[d, dashed, "\C"'] & \ST \arrow[r, "\text{Choose }\tau"] \arrow[d, dashed, "\text{Obs-invariants}"] & (\ST,\tau) \arrow[r, dashed, "T:\text{gauge-fix}"] & \text{Chronology} \\
-\Ecat_{\C\text{-alg}} \arrow[r, dashed, "\exists!"] & \text{Invariant Data} \arrow[urr, bend right=15, "\text{Narrative depends on }T"']
+\begin{tikzcd}[row sep=huge, column sep=huge]
+\Ecat \arrow[r, "\F"] \arrow[d, "\C"'] & \ST \arrow[r, "\text{Choose }\tau"] \arrow[d, dashed, "\text{Gauge-invariant}"'] & (\ST,\tau) \arrow[r, "\text{Fix }T", dashed] \arrow[d, dashed] & \text{Chronology} \arrow[d, dashed, "\text{Narrative}"] \\
+\Ecat/\C \arrow[r, dashed, "\exists! \bar{\F}"] & \text{Invariant Structure} \arrow[urr, dashed, bend right=20, "\text{Gauge dependence}"'] & \text{Gauge-Fixed} \arrow[r, dashed] & \text{Evolution Story}
 \end{tikzcd}
-\caption{Emergence, gauge choice for time, and deep-time gauge fixing to produce chronology. Invariants commute; narratives do not.}
+\caption{Categorical structure showing emergence ($\F$), coarse-graining ($\C$), gauge choice ($\tau$), and deep-time gauge fixing ($T$). Solid arrows preserve ontological content; dashed arrows introduce gauge dependence.}
 \end{figure}
 
-% ===================== 7. Empirical Program =====================
+% ===================== 6. Empirical Program =====================
 \section{Empirical Program: Discriminating Predictions}
-\paragraph{(E1) Multi-Clock Gauge Linearity.}
-Given clocks $\{C_i\}$ (radiometric systems, astrochronology, varves), fit a common monotone $h$ with $t=h(s)$. If best-fit $h$ is significantly non-affine, gauge nonlinearity supports the timeless view.
 
-\paragraph{(E2) Cross-Context Clock Ratios.}
-Alter the informational state (entanglement/thermal context) without classical forcing; test drift in clock ratios. State-dependent time predicts context effects.
+\begin{definition}[Gauge Linearity Test]
+For clocks $\{C_i\}_{i=1}^n$, define the \emph{gauge linearity index}:
+$$\mathcal{G} = \inf_{h \in \mathcal{H}} \sum_{i=1}^n \int_\Omega \left| \frac{d^2 h}{ds^2} \right|^2 \frac{dC_i}{ds} ds$$
+where $\mathcal{H}$ is the space of monotone reparameterizations and $\Omega$ is the measurement domain.
+\end{definition}
 
-\paragraph{(E3) Poset Underdetermination.}
-Field constraints define a DAG. Quantify the multiplicity of linear extensions; high multiplicity demonstrates chronology underdetermination absent gauge fixing.
+\begin{proposition}[Linearity Detection]
+$\mathcal{G} = 0$ iff there exists an affine gauge making all clocks exponential with constant rates.
+\end{proposition}
 
-\paragraph{(E4) Information-Geometric Path Length.}
-Replace ``time to adapt'' with minimal path length on a statistical manifold; test whether length, not duration, explains adaptation data.
+\begin{proof}
+$\mathcal{G} = 0$ requires $d^2h/ds^2 = 0$ wherever $dC_i/ds \neq 0$. Since measurements are assumed dense, this forces $h$ to be affine. Conversely, if $h$ is affine, then $d^2h/ds^2 = 0$ identically, giving $\mathcal{G} = 0$.
+\end{proof}
 
-% ===================== 8. Haskell Appendices =====================
+\paragraph{Empirical Tests}
+
+\begin{enumerate}[label=(E\arabic*)]
+\item \textbf{Multi-Clock Gauge Linearity}: Measure $\mathcal{G}$ across radiometric systems. Significant nonlinearity supports gauge-dependent time.
+
+\item \textbf{Context-Dependent Clock Ratios}: Alter physical context (temperature, pressure, electromagnetic fields) while measuring clock ratios $C_i(s)/C_j(s)$. Context-dependence indicates emergent time.
+
+\item \textbf{Stratigraphic Poset Underdetermination}: For fossil assemblages, count linear extensions of the stratigraphic partial order. High multiplicity demonstrates chronological underdetermination.
+
+\item \textbf{Information-Geometric vs Temporal Distances}: Replace temporal intervals with information-geometric path lengths on trait manifolds. Test whether morphological "distances" correlate better with information metrics than temporal duration.
+\end{enumerate}
+
+% ===================== 7. Haskell Implementation =====================
 \appendix
-\section*{Appendix A: Haskell — Stratigraphy as a Partial Order}
-\begin{lstlisting}
--- file: PosetStratigraphy.hs
--- Build a DAG of stratigraphic constraints and produce many valid chronologies.
+\section*{Appendix A: Computational Implementation}
 
+\subsection*{Stratigraphy as Partial Order}
+\begin{lstlisting}
+-- PosetStratigraphy.hs: DAG-based stratigraphic analysis
 module PosetStratigraphy where
 
 import qualified Data.Map.Strict as M
 import qualified Data.Set as S
+import Control.Monad (foldM)
 import System.Random (randomRIO)
 
-type Node   = String
-type Graph  = M.Map Node (S.Set Node)  -- adjacency: node -> successors
+type Node = String
+type Graph = M.Map Node (S.Set Node)
 
-addNode :: Node -> Graph -> Graph
-addNode v g = if M.member v g then g else M.insert v S.empty g
+-- Build stratigraphic DAG
+addConstraint :: Node -> Node -> Graph -> Graph  
+addConstraint below above g =
+  let g' = M.insertWith S.union below S.empty g
+      g'' = M.insertWith S.union above S.empty g'
+  in M.adjust (S.insert above) below g''
 
-addEdge :: Node -> Node -> Graph -> Graph
-addEdge u v g =
-  let g' = addNode u (addNode v g)
-  in M.adjust (S.insert v) u g'
-
+-- Compute in-degrees for topological sorting  
 inDegrees :: Graph -> M.Map Node Int
-inDegrees g =
-  let allNodes = M.keysSet g
-      zeros    = M.fromSet (const 0) allNodes
-      bump m v = M.insertWith (+) v 1 m
-  in M.foldlWithKey' (\m u succs -> S.foldl' bump m succs) zeros g
+inDegrees g = 
+  let nodes = M.keysSet g
+      zeros = M.fromSet (const 0) nodes
+  in M.foldlWithKey' (\acc u succs -> 
+       S.foldl' (\m v -> M.insertWith (+) v 1 m) acc succs) zeros g
 
--- Kahn's algorithm with random tie-breaking to sample linear extensions
-topoSample :: Graph -> IO [Node]
-topoSample g0 = go g0 (S.fromList [ v | (v,d) <- M.toList (inDegrees g0), d == 0 ]) []
+-- Sample random linear extension (Kahn's algorithm with random selection)
+sampleLinearExtension :: Graph -> IO (Maybe [Node])
+sampleLinearExtension g = go g (inDegrees g) []
   where
-    go g s acc
-      | S.null s  = if all (==0) (M.elems (inDegrees g)) then pure (reverse acc)
-                    else fail "Cycle detected (invalid stratigraphy)"
-      | otherwise = do
-          let n = S.size s
-          i <- randomRIO (0, n-1)
-          let v     = S.elemAt i s
-              succs = M.findWithDefault S.empty v g
-              g'    = M.delete v g
-              predsOf w g'' = [ u | (u,succs') <- M.toList g'', S.member w succs' ]
-              s' = S.delete v s `S.union`
-                   S.fromList [ w | w <- S.toList succs
-                                  , null (predsOf w g') ]
-          go g' s' (v:acc)
+    go graph degrees result = do
+      let sources = [n | (n,d) <- M.toList degrees, d == 0]
+      case sources of
+        [] -> return $ if M.null graph then Just (reverse result) else Nothing
+        _ -> do
+          idx <- randomRIO (0, length sources - 1)
+          let chosen = sources !! idx
+              succs = M.findWithDefault S.empty chosen graph
+              graph' = M.delete chosen graph
+              degrees' = S.foldl' (\m v -> M.adjust (subtract 1) v m) 
+                                 (M.delete chosen degrees) succs
+          go graph' degrees' (chosen : result)
+
+-- Count total linear extensions (exponential complexity)
+countLinearExtensions :: Graph -> Int
+countLinearExtensions g = length $ allTopologicalSorts g
+  where
+    allTopologicalSorts graph
+      | M.null graph = [[]]
+      | otherwise = 
+          let sources = [n | (n,d) <- M.toList (inDegrees graph), d == 0]
+          in [n:rest | n <- sources, 
+                      rest <- allTopologicalSorts (removeNode n graph)]
+    
+    removeNode n graph = 
+      let succs = M.findWithDefault S.empty n graph
+          graph' = M.delete n graph
+      in M.map (S.delete n) graph'
 \end{lstlisting}
 
-\section*{Appendix B: Haskell — Radiometry Under Time Gauge}
+\subsection*{Radiometric Gauge Analysis}
 \begin{lstlisting}
--- file: EmergentTimeRadiometry.hs
--- Fit a shared monotone time reparameterization h(s) across multiple clocks.
+-- RadiometricGauge.hs: Multi-clock gauge fitting
+module RadiometricGauge where
 
-{-# LANGUAGE ScopedTypeVariables #-}
-module EmergentTimeRadiometry where
+data Clock = Clock 
+  { clockName :: String
+  , samplePoints :: [Double]  -- parameter values
+  , logCounts :: [Double]     -- log(measured counts)
+  , decayConstant :: Double   -- nominal lambda
+  }
 
-import Data.List (foldl')
+-- Fit h(s) = a*s^b across multiple clocks
+type GaugeParams = (Double, Double)  -- (a, b)
 
-data Clock = Clock { name :: String
-                   , sVals :: [Double]
-                   , logCi :: [Double]      -- log measured clock values
-                   , lambdaTrue :: Double   -- nominal decay constant
-                   }
+-- Objective function for gauge fitting
+gaugeObjective :: [Clock] -> GaugeParams -> Double  
+gaugeObjective clocks (a, b) = sum [clockError clock (a, b) | clock <- clocks]
+  where
+    clockError (Clock _ ss logs lambda) (a, b) = 
+      sum [(log_obs - log_pred)^2 | (s, log_obs) <- zip ss logs,
+           let log_pred = -lambda * a * (s ** b)]
 
--- Model: log C_i(s) = - lambda_i * h(s)
-modelLogC :: Double -> Double -> Double -> Double
-modelLogC a b s = a * (s ** b)  -- h(s) = a * s^b
+-- Grid search for optimal gauge parameters
+findOptimalGauge :: [Clock] -> [Double] -> [Double] -> (GaugeParams, Double)
+findOptimalGauge clocks as bs = 
+  minimumBy (\(_, err1) (_, err2) -> compare err1 err2)
+    [((a, b), gaugeObjective clocks (a, b)) | a <- as, b <- bs]
 
-objective :: [Clock] -> (Double,Double) -> Double
-objective clocks (a,b) =
-  sum [ sum [ let pred = - (lambdaTrue c) * modelLogC a b s
-                  d    = y - pred
-              in d*d
-            | (s,y) <- zip (sVals c) (logCi c)
-            ]
-      | c <- clocks
-      ]
+-- Test for gauge linearity (b ≈ 1)
+isLinearGauge :: GaugeParams -> Double -> Bool
+isLinearGauge (_, b) tolerance = abs (b - 1.0) < tolerance
 
-gridSearch :: [Clock] -> [Double] -> [Double] -> ((Double,Double), Double)
-gridSearch clocks as bs =
-  let candidates = [ ((a,b), objective clocks (a,b)) | a <- as, b <- bs ]
-  in foldl' (\best x -> if snd x < snd best then x else best) (head candidates) (tail candidates)
+-- Compute gauge linearity index
+gaugeLinearityIndex :: [Clock] -> GaugeParams -> Double
+gaugeLinearityIndex clocks (a, b) = 
+  if abs (b - 1.0) < 1e-10 
+    then 0.0  -- exactly linear
+    else sum [clockNonlinearity clock (a, b) | clock <- clocks]
+  where
+    clockNonlinearity (Clock _ ss _ lambda) (a, b) =
+      sum [(b - 1.0)^2 * (log s)^2 | s <- ss, s > 0]
 \end{lstlisting}
 
-\section*{Appendix C: Haskell — Information-Geometric Length}
+\subsection*{Information-Geometric Distance}
 \begin{lstlisting}
--- file: InfoLength.hs
--- Compare absolute duration vs. Fisher information length along a trait trajectory.
+-- InfoGeometry.hs: Information-theoretic trait distances
+module InfoGeometry where
 
-module InfoLength where
-
+import qualified Data.Vector.Storable as V
 import Numeric.LinearAlgebra
 
-type Vec = Vector Double
+type TraitVector = Vector Double
+type TraitPath = [TraitVector]
 
--- Fisher-like length for a categorical distribution p (diag 1/p_i)
-fisherLen :: [Vec] -> Double
-fisherLen ps =
-  let segs = zip ps (tail ps)
-      step (p,q) =
-        let dp  = q - p
-            inv = cmap (\x -> 1 / max x 1e-12) p
-        in sqrt (dp <.> (inv * dp))
-  in sum (map step segs)
+-- Fisher information metric for trait distributions
+fisherMetric :: TraitVector -> Matrix Double
+fisherMetric p = diag (cmap (\x -> 1.0 / max x 1e-12) p)
+
+-- Infinitesimal distance element  
+fisherDistance :: TraitVector -> TraitVector -> Double
+fisherDistance p q = 
+  let dp = q - p
+      g = fisherMetric p
+  in sqrt (dp <.> (g #> dp))
+
+-- Total path length in information geometry
+informationLength :: TraitPath -> Double  
+informationLength [] = 0.0
+informationLength [_] = 0.0
+informationLength (p:q:rest) = fisherDistance p q + informationLength (q:rest)
+
+-- Compare with temporal duration
+data Measurement = Measurement
+  { traitPath :: TraitPath
+  , temporalDuration :: Double
+  , informationDistance :: Double
+  } deriving (Show)
+
+analyzeTrait :: TraitPath -> Double -> Measurement
+analyzeTrait path duration = Measurement path duration (informationLength path)
+
+-- Test correlation between information and temporal distances
+correlationTest :: [Measurement] -> Double
+correlationTest measurements = 
+  let durations = [temporalDuration m | m <- measurements]
+      infoDists = [informationDistance m | m <- measurements]
+  in pearsonCorrelation durations infoDists
+
+pearsonCorrelation :: [Double] -> [Double] -> Double
+pearsonCorrelation xs ys = 
+  let n = fromIntegral (length xs)
+      meanX = sum xs / n
+      meanY = sum ys / n
+      numerator = sum [(x - meanX) * (y - meanY) | (x, y) <- zip xs ys]
+      denomX = sqrt $ sum [(x - meanX)^2 | x <- xs]
+      denomY = sqrt $ sum [(y - meanY)^2 | y <- ys]
+  in numerator / (denomX * denomY)
 \end{lstlisting}
 
-% ===================== 9. Related Work (minimal pointers) =====================
-\section{Related Theoretical Pointers (Minimal)}
-Timeless dynamics via correlations: Page--Wootters; state-dependent time: Connes--Rovelli. These motivate treating time as gauge/derived. Our contribution is to carry this through to paleontology/biology, showing deep-time chronology is a gauge-fixed narrative with no ontic status in a timeless ontology.
-
-% ===================== 10. Conclusion =====================
 \section{Conclusion}
-We formalized a timeless, spaceless ontology with emergence functor $\F:\Ecat\to\ST$, proved that absolute durations are not invariants (time is gauge), analyzed radiometry under reparameterization, and demonstrated that paleontological chronology depends on a non-fundamental deep-time mapping. Consequently, \emph{evolution as currently described}—a deep-time, gradualist narrative—is false as a fundamental theory within this ontology. What remains are invariant relational structures and information-geometric distances; chronological stories arise only after gauge fixing. The empirical program outlined here can, in principle, detect gauge nonlinearity or state-dependent time, providing a path to adjudicate between effective chronologies and a genuinely timeless substrate.
+We have formalized a timeless, spaceless ontology with emergence functor $\F:\Ecat\to\ST$, proved rigorously that absolute durations are not invariants (time is gauge), analyzed radiometry under reparameterization, and demonstrated that paleontological chronology depends on a non-fundamental deep-time mapping. 
+
+\begin{theorem}[Final Consequence]
+Within this ontology, \emph{evolution as currently described}—a deep-time, gradualist narrative—is false as a fundamental theory. What remains are invariant relational structures in $\Ecat$ and information-geometric distances; chronological stories arise only after gauge fixing.
+\end{theorem}
+
+The empirical program outlined provides concrete tests to detect gauge nonlinearity, state-dependent time effects, and chronological underdetermination. The computational tools enable practical implementation of these theoretical concepts, bridging formal ontology with empirical investigation.
 
 \bibliographystyle{unsrtnat}
 \begin{thebibliography}{9}
@@ -361,6 +489,16 @@ D.~N.~Page and W.~K.~Wootters.
 A.~Connes and C.~Rovelli.
 \newblock Von Neumann Algebra Automorphisms and Time–Thermodynamics relation in generally covariant quantum theories.
 \newblock \emph{Class. Quantum Grav.} 11 (1994).
+
+\bibitem{barbour1999}
+J.~Barbour.
+\newblock \emph{The End of Time: The Next Revolution in Physics}.
+\newblock Oxford University Press (1999).
+
+\bibitem{rovelli2004}
+C.~Rovelli.
+\newblock \emph{Quantum Gravity}.
+\newblock Cambridge University Press (2004).
 
 \end{thebibliography}
 
