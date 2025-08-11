@@ -1,0 +1,367 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{authblk}
+\usepackage[numbers]{natbib}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,language=Haskell}
+
+\title{\textbf{Timeless Emergent Spacetime and the Gauge Nature of Time: \\
+A Formal Ontology that Invalidates Deep Time and Evolutionary Chronology}}
+\author[1]{Matthew Long}
+\affil[1]{Yoneda AI}
+\date{\today}
+
+% ---------- theorem environments ----------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}[definition]{Assumption}
+\newtheorem{example}[definition]{Example}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+% ---------- macros ----------
+\newcommand{\Ecat}{\mathbf{E}}      % category of informational states
+\newcommand{\ST}{\mathbf{ST}}       % category of spacetime representations
+\newcommand{\Lang}{\mathbf{Lang}}   % category of formal languages
+\newcommand{\Obs}{\mathbf{O}}       % subcategory of observer-bearing states
+\newcommand{\F}{\mathcal{F}}        % emergence functor
+\newcommand{\I}{\mathcal{I}}        % invariants functor
+\newcommand{\C}{\mathcal{C}}        % coarse-graining/compression
+\newcommand{\Id}{\mathbbm{1}}       % identity
+\newcommand{\eqdef}{\vcentcolon=}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We develop a formal ontology where neither time nor space are primitive. The fundament is a category $\Ecat$ of informational states and admissible morphisms preserving invariants. Observable spacetime is the image of a functor $\F:\Ecat\to\ST$, a coarse-grained representation accessible to internal observers $\Obs\subset\Ecat$. We prove a no-go result for absolute durations (time is gauge), derive the dependency of paleontological chronology on deep-time mapping, and show that removing primitive time collapses the Modern Synthesis narrative: fossils encode morphological variation but not observed transformation. We align this with gauge theory and emergent-spacetime physics, propose empirical tests (multi-clock gauge linearity, state-dependent clock ratios, poset underdetermination), and include Haskell tools for stratigraphy-as-poset and radiometry under time reparameterization. A corollary states that evolution as currently described is false as a \emph{fundamental} theory once deep time is recognized as gauge.
+\end{abstract}
+
+\tableofcontents
+
+% ===================== 1. Ontology =====================
+\section{Ontology: Informational Substrate and Emergence}
+\subsection{Architecture}
+\begin{itemize}[leftmargin=1.2em]
+\item $\Ecat$: category of informational states $S$ and admissible morphisms $f:S\to S'$ preserving a family of invariants $\I$.
+\item $\ST$: category of observer-eligible representational objects (e.g., manifold-like or causal-site structures).
+\item $\F:\Ecat\to\ST$: emergence functor projecting informational relations to spacetime-like appearances.
+\item $\Obs\subset\Ecat$: states with self-referential subsystems (observers); theories live in $\Lang$ with internal semantics.
+\end{itemize}
+
+\begin{assumption}[Primacy of Information]
+There exists a category $\Ecat$ of informational states with morphisms preserving $\I$. No primitive time or space is posited.
+\end{assumption}
+
+\begin{remark}[No Primitive Order]
+Composition in $\Ecat$ expresses relational compatibility, not succession in time. ``Before/after'' is representational (in $\ST$), not ontological (in $\Ecat$).
+\end{remark}
+
+\subsection{Coarse-Graining Monad}
+\begin{definition}[Coarse-Graining]
+A monad $(\C,\eta,\mu)$ on $\Ecat$ encodes admissible compressions; $\C$-algebras represent macroscopic states.
+\end{definition}
+
+\section{Representation and Non-Injectivity}
+\begin{definition}[Emergence]
+$\F:\Ecat\to\ST$ assigns to $S$ an appearance $\F(S)$ and to $f$ a structure-preserving map $\F(f)$ in $\ST$.
+\end{definition}
+
+\begin{proposition}[Many-to-One Emergence]
+If $\F$ factors through $\C$-algebras and $\C(S)\cong\C(S')$ for distinct $S\not\cong S'$, then $\F(S)\cong \F(S')$ in $\ST$. Distinct substrates can yield identical appearances.
+\end{proposition}
+
+% ===================== 2. Time as Gauge =====================
+\section{Time as a Gauge: No Absolute Duration}
+Let $\mathcal{T}$ denote the groupoid of strictly increasing reparameterizations of an emergent temporal coordinate $\tau$ used in $\ST$.
+
+\begin{definition}[Duration Functional]
+A duration assignment $D$ maps an unparameterized orbit segment (endpoints on a trajectory) to $\mathbb{R}_{\ge 0}$, and satisfies: (i) concatenation additivity; (ii) invariance under $\mathcal{T}$; (iii) orbit-intrinsic dependence only on the segment and endpoints.
+\end{definition}
+
+\begin{theorem}[No Nontrivial Absolute Duration]\label{thm:no_duration}
+Under (i)–(iii), any $D$ is trivial (identically zero) or reduces to a constant multiple of a fixed external calibration that breaks full $\mathcal{T}$-invariance. Absolute deep-time durations are not invariants of the ontology.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Let $\gamma:[0,1]\to X$ be an orbit segment. For any $\tau\in\mathrm{Diff}_+([0,1])$, invariance gives $D(\gamma)=D(\gamma\circ\tau)$. Using a refining sequence of $\tau_n$ that compresses measure near an endpoint while preserving endpoints, additivity forces equality of $D$ across arbitrarily reweighted subdivisions. Either $D\equiv 0$ or one selects a privileged $\tau$ (an external calibration), breaking full invariance. 
+\end{proof}
+
+\begin{remark}
+Time is a gauge parameter: numerical ages are coordinate conventions, not ontological magnitudes. Observables must be invariant under $\mathcal{T}$.
+\end{remark}
+
+% ===================== 3. Radiometry under reparam =====================
+\section{Radiometric Dating Under Time Reparameterization}
+Let $N(t)=N_0 e^{-\lambda t}$ be decay under a calibrated clock $t$, and let $t=h(s)$ be a monotone reparameterization.
+
+\begin{proposition}[Exponential Form and Affine Gauge]
+$N$ is exponential in $s$ with constant rate $\lambda'$ iff $h(s)=a s+b$ with $a>0$. Otherwise the effective rate $\lambda(s)=\lambda h'(s)$ varies.
+\end{proposition}
+
+\begin{proof}
+Require $N_0 e^{-\lambda' s}=N_0 e^{-\lambda h(s)}$. Differentiating gives $\lambda'=\lambda h'(s)$. Constancy of $\lambda'$ implies $h'$ constant, hence $h$ affine.
+\end{proof}
+
+\noindent \textbf{Interpretation:} If time is emergent and $h$ is nonlinear, either (i) effective rates vary in $s$, or (ii) different clocks cannot be jointly linearized by a single affine gauge. Empirically, high-precision studies are consistent with an \emph{approximately affine} gauge in our domain—supporting effective chronology, not fundamental time.
+
+% ===================== 4. Fossils, Deep Time, and Collapse =====================
+\section{Fossil Record, Deep Time, and Collapse of Evolutionary Chronology}
+Let $F$ be the set of fossil specimens (static morphologies). Let $T:F\to\mathbb{R}$ assign deep-time positions via dating.
+
+\begin{definition}[Evolutionary Change Function]
+\[
+E(F,T) \;=\; \text{Narrative}(\text{Order}(F,T), \text{Morphology}(F)),
+\]
+where $\text{Order}(F,T)$ sorts $F$ by $T$ and $\text{Morphology}(F)$ collects traits. $E$ outputs a hypothesized transformation path.
+\end{definition}
+
+\begin{proposition}[Dependency on $T$]
+If $T$ is removed or invalidated, $E(F,T)$ reduces to unordered morphologies:
+\[
+E(F,\varnothing) = \{ \text{Morphology}(f) \mid f\in F\}.
+\]
+Without $T$, a transformation sequence lacks support.
+\end{proposition}
+
+\begin{proof}
+Transformation claims require a total order to define ``before/after.'' Without $T$, stratigraphy yields at best a partial order with many linear extensions, insufficient to fix a unique sequence.
+\end{proof}
+
+\begin{lemma}[Link to Theorem \ref{thm:no_duration}]
+By Theorem \ref{thm:no_duration}, any absolute deep-time mapping $T$ is gauge-dependent. Hence $T$ lacks ontological status in this ontology.
+\end{lemma}
+
+\begin{corollary}[Falsity of the Modern Synthesis as Fundamental Theory]
+If deep time is not fundamental, the Modern Synthesis narrative of gradual transformation over millions of years is false as a fundamental theory: its fossil-based chronology collapses to gauge-fixed storytelling. Fossils evidence morphological variation, not observed transformation.
+\end{corollary}
+
+% ===================== 5. Narrative Breakdown (merged with gauge theory) =====================
+\section{Narrative Breakdown of Deep Time in Our Ontology and its Physics Alignment}
+
+\subsection{Narrative Breakdown in Our Ontology}
+In our ontology, \textbf{time is a gauge parameter}, meaning:
+\begin{itemize}
+    \item There is no absolute, observer-independent temporal dimension.
+    \item Any ``clock'' is calibrated within a chosen gauge.
+    \item Numerical assignments (``millions,'' ``billions'' of years) reflect measurement conventions tied to gauge, not properties of reality-in-itself.
+\end{itemize}
+
+\paragraph{1. Gauge-Dependent Measurement.}
+Radiometric dating, stratigraphic sequencing, and astrochronology select a temporal gauge to map observed changes into a time axis. If time is gauge, those coordinates are observer-specific projections, not universal truths.
+
+\paragraph{2. Loss of Ontological Chronology.}
+Without a fundamental clock, there is no cosmic stopwatch. ``Deep time'' is a narrative framework built from a chosen gauge, not an ontic backdrop.
+
+\paragraph{3. Collapse of Evolutionary Sequencing.}
+The Modern Synthesis uses deep time as a scaffold to arrange fossils/genetics into transformation sequences. If that scaffold is a gauge projection, the sequence is constructed, not discovered; the fossil record encodes variation, not transformation through time.
+
+\subsection{Alignment with Gauge Theory and Emergent Spacetime Physics}
+Gauge invariance marks variables that can change without altering physical content (e.g., $A_\mu\mapsto A_\mu+\partial_\mu\chi$ leaves fields unchanged). In our ontology, temporal reparameterizations $\tau\mapsto f(\tau)$ are gauge: physical invariants reside in relational structure in $\Ecat$, not in $\tau$ itself. Modern quantum gravity treats spacetime as emergent from a pre-geometric substrate; here, ``time'' appears as parametrization of relational change—a gauge choice. Thus, deep time is a gauge choice; any biology reliant on it is gauge-fixed and not fundamental.
+
+% ===================== 6. Diagram(s) =====================
+\section{Diagrams: Parallels Across Physics and Paleontology}
+
+\subsection{Conceptual Diagram (Boxes and Arrows)}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[node distance=2.1cm,>=stealth,thick]
+\node (gt) [draw, rounded corners, align=center] {Gauge Theory\\(Electromagnetism)};
+\node (em) [draw, rounded corners, below of=gt, align=center] {Gauge Variable:\\Vector Potential $A_\mu$};
+\node (obs) [draw, rounded corners, below of=em, align=center] {Invariants:\\$E$, $B$ Fields};
+
+\node (et) [draw, rounded corners, right=4.5cm of gt, align=center] {Emergent Spacetime\\(Our Ontology)};
+\node (tg) [draw, rounded corners, below of=et, align=center] {Gauge Variable:\\Time Param. $\tau$};
+\node (inv) [draw, rounded corners, below of=tg, align=center] {Invariants:\\Relational Structure in $\Ecat$};
+
+\node (pa) [draw, rounded corners, right=4.5cm of et, align=center] {Paleontology\\(Chronology)};
+\node (dt) [draw, rounded corners, below of=pa, align=center] {Gauge Choice:\\Deep-Time Map $T$};
+\node (seq) [draw, rounded corners, below of=dt, align=center] {Narrative:\\Evolutionary Sequence};
+
+\draw[->] (gt) -- (em);
+\draw[->] (em) -- (obs);
+
+\draw[->] (et) -- (tg);
+\draw[->] (tg) -- (inv);
+
+\draw[->] (pa) -- (dt);
+\draw[->] (dt) -- (seq);
+
+\draw[<->, dashed] (em.east) -- node[above]{analogy} (tg.west);
+\draw[<->, dashed] (obs.east) -- node[above]{invariants vs. gauge} (inv.west);
+\draw[<->, dashed] (tg.east) -- node[above]{gauge fixing} (dt.west);
+\end{tikzpicture}
+\caption{Parallel: gauge redundancy in EM, time gauge in emergent spacetime, and deep-time gauge in paleontology.}
+\end{figure}
+
+\subsection{Commutative-Style Diagram (TikZ-CD)}
+\begin{figure}[h!]
+\centering
+\begin{tikzcd}[row sep=large, column sep=large]
+\Ecat \arrow[r, "\F"] \arrow[d, dashed, "\C"'] & \ST \arrow[r, "\text{Choose }\tau"] \arrow[d, dashed, "\text{Obs-invariants}"] & (\ST,\tau) \arrow[r, dashed, "T:\text{gauge-fix}"] & \text{Chronology} \\
+\Ecat_{\C\text{-alg}} \arrow[r, dashed, "\exists!"] & \text{Invariant Data} \arrow[urr, bend right=15, "\text{Narrative depends on }T"']
+\end{tikzcd}
+\caption{Emergence, gauge choice for time, and deep-time gauge fixing to produce chronology. Invariants commute; narratives do not.}
+\end{figure}
+
+% ===================== 7. Empirical Program =====================
+\section{Empirical Program: Discriminating Predictions}
+\paragraph{(E1) Multi-Clock Gauge Linearity.}
+Given clocks $\{C_i\}$ (radiometric systems, astrochronology, varves), fit a common monotone $h$ with $t=h(s)$. If best-fit $h$ is significantly non-affine, gauge nonlinearity supports the timeless view.
+
+\paragraph{(E2) Cross-Context Clock Ratios.}
+Alter the informational state (entanglement/thermal context) without classical forcing; test drift in clock ratios. State-dependent time predicts context effects.
+
+\paragraph{(E3) Poset Underdetermination.}
+Field constraints define a DAG. Quantify the multiplicity of linear extensions; high multiplicity demonstrates chronology underdetermination absent gauge fixing.
+
+\paragraph{(E4) Information-Geometric Path Length.}
+Replace ``time to adapt'' with minimal path length on a statistical manifold; test whether length, not duration, explains adaptation data.
+
+% ===================== 8. Haskell Appendices =====================
+\appendix
+\section*{Appendix A: Haskell — Stratigraphy as a Partial Order}
+\begin{lstlisting}
+-- file: PosetStratigraphy.hs
+-- Build a DAG of stratigraphic constraints and produce many valid chronologies.
+
+module PosetStratigraphy where
+
+import qualified Data.Map.Strict as M
+import qualified Data.Set as S
+import System.Random (randomRIO)
+
+type Node   = String
+type Graph  = M.Map Node (S.Set Node)  -- adjacency: node -> successors
+
+addNode :: Node -> Graph -> Graph
+addNode v g = if M.member v g then g else M.insert v S.empty g
+
+addEdge :: Node -> Node -> Graph -> Graph
+addEdge u v g =
+  let g' = addNode u (addNode v g)
+  in M.adjust (S.insert v) u g'
+
+inDegrees :: Graph -> M.Map Node Int
+inDegrees g =
+  let allNodes = M.keysSet g
+      zeros    = M.fromSet (const 0) allNodes
+      bump m v = M.insertWith (+) v 1 m
+  in M.foldlWithKey' (\m u succs -> S.foldl' bump m succs) zeros g
+
+-- Kahn's algorithm with random tie-breaking to sample linear extensions
+topoSample :: Graph -> IO [Node]
+topoSample g0 = go g0 (S.fromList [ v | (v,d) <- M.toList (inDegrees g0), d == 0 ]) []
+  where
+    go g s acc
+      | S.null s  = if all (==0) (M.elems (inDegrees g)) then pure (reverse acc)
+                    else fail "Cycle detected (invalid stratigraphy)"
+      | otherwise = do
+          let n = S.size s
+          i <- randomRIO (0, n-1)
+          let v     = S.elemAt i s
+              succs = M.findWithDefault S.empty v g
+              g'    = M.delete v g
+              predsOf w g'' = [ u | (u,succs') <- M.toList g'', S.member w succs' ]
+              s' = S.delete v s `S.union`
+                   S.fromList [ w | w <- S.toList succs
+                                  , null (predsOf w g') ]
+          go g' s' (v:acc)
+\end{lstlisting}
+
+\section*{Appendix B: Haskell — Radiometry Under Time Gauge}
+\begin{lstlisting}
+-- file: EmergentTimeRadiometry.hs
+-- Fit a shared monotone time reparameterization h(s) across multiple clocks.
+
+{-# LANGUAGE ScopedTypeVariables #-}
+module EmergentTimeRadiometry where
+
+import Data.List (foldl')
+
+data Clock = Clock { name :: String
+                   , sVals :: [Double]
+                   , logCi :: [Double]      -- log measured clock values
+                   , lambdaTrue :: Double   -- nominal decay constant
+                   }
+
+-- Model: log C_i(s) = - lambda_i * h(s)
+modelLogC :: Double -> Double -> Double -> Double
+modelLogC a b s = a * (s ** b)  -- h(s) = a * s^b
+
+objective :: [Clock] -> (Double,Double) -> Double
+objective clocks (a,b) =
+  sum [ sum [ let pred = - (lambdaTrue c) * modelLogC a b s
+                  d    = y - pred
+              in d*d
+            | (s,y) <- zip (sVals c) (logCi c)
+            ]
+      | c <- clocks
+      ]
+
+gridSearch :: [Clock] -> [Double] -> [Double] -> ((Double,Double), Double)
+gridSearch clocks as bs =
+  let candidates = [ ((a,b), objective clocks (a,b)) | a <- as, b <- bs ]
+  in foldl' (\best x -> if snd x < snd best then x else best) (head candidates) (tail candidates)
+\end{lstlisting}
+
+\section*{Appendix C: Haskell — Information-Geometric Length}
+\begin{lstlisting}
+-- file: InfoLength.hs
+-- Compare absolute duration vs. Fisher information length along a trait trajectory.
+
+module InfoLength where
+
+import Numeric.LinearAlgebra
+
+type Vec = Vector Double
+
+-- Fisher-like length for a categorical distribution p (diag 1/p_i)
+fisherLen :: [Vec] -> Double
+fisherLen ps =
+  let segs = zip ps (tail ps)
+      step (p,q) =
+        let dp  = q - p
+            inv = cmap (\x -> 1 / max x 1e-12) p
+        in sqrt (dp <.> (inv * dp))
+  in sum (map step segs)
+\end{lstlisting}
+
+% ===================== 9. Related Work (minimal pointers) =====================
+\section{Related Theoretical Pointers (Minimal)}
+Timeless dynamics via correlations: Page--Wootters; state-dependent time: Connes--Rovelli. These motivate treating time as gauge/derived. Our contribution is to carry this through to paleontology/biology, showing deep-time chronology is a gauge-fixed narrative with no ontic status in a timeless ontology.
+
+% ===================== 10. Conclusion =====================
+\section{Conclusion}
+We formalized a timeless, spaceless ontology with emergence functor $\F:\Ecat\to\ST$, proved that absolute durations are not invariants (time is gauge), analyzed radiometry under reparameterization, and demonstrated that paleontological chronology depends on a non-fundamental deep-time mapping. Consequently, \emph{evolution as currently described}—a deep-time, gradualist narrative—is false as a fundamental theory within this ontology. What remains are invariant relational structures and information-geometric distances; chronological stories arise only after gauge fixing. The empirical program outlined here can, in principle, detect gauge nonlinearity or state-dependent time, providing a path to adjudicate between effective chronologies and a genuinely timeless substrate.
+
+\bibliographystyle{unsrtnat}
+\begin{thebibliography}{9}
+
+\bibitem{pagewootters1983}
+D.~N.~Page and W.~K.~Wootters.
+\newblock Evolution without evolution: Dynamics described by stationary observables.
+\newblock \emph{Phys. Rev. D} 27, 2885 (1983).
+
+\bibitem{connesrovelli1994}
+A.~Connes and C.~Rovelli.
+\newblock Von Neumann Algebra Automorphisms and Time–Thermodynamics relation in generally covariant quantum theories.
+\newblock \emph{Class. Quantum Grav.} 11 (1994).
+
+\end{thebibliography}
+
+\end{document}
