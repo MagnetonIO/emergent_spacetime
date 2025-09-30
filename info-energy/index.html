@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E = Ic² | Information-Energy Equivalence</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-haskell.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="equation-logo">E = Ic²</span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#theory" class="nav-link">Theory</a>
+                <a href="#implementation" class="nav-link">Implementation</a>
+                <a href="#demos" class="nav-link">Demos</a>
+                <a href="#papers" class="nav-link">Papers</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime" class="nav-link github-link">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="quantumCanvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-equation">E = Ic²</h1>
+            <p class="hero-subtitle">Information-Energy Equivalence</p>
+            <p class="hero-description">
+                A fundamental reconceptualization of physics where spacetime, matter, and energy 
+                emerge from quantum information processing
+            </p>
+            <div class="hero-buttons">
+                <a href="#theory" class="btn btn-primary">Explore Theory</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/code/haskell/foundations/information_energy_equivalence" class="btn btn-secondary">View Code</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <section id="theory" class="section">
+        <div class="container">
+            <h2 class="section-title">The Fundamental Equation</h2>
+            <div class="equation-display">
+                <div class="main-equation">
+                    \[ E = Ic^2 \]
+                </div>
+                <div class="equation-legend">
+                    <div class="legend-item">
+                        <span class="symbol">E</span>
+                        <span class="description">Energy (Joules)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="symbol">I</span>
+                        <span class="description">Information Density (bits/m³)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="symbol">c</span>
+                        <span class="description">Speed of Light (299,792,458 m/s)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="theory-grid">
+                <div class="theory-card">
+                    <h3>Core Principle</h3>
+                    <p>Mass and energy are not fundamental properties but emerge from information density 
+                    within quantum error-correcting codes that generate spacetime itself.</p>
+                    <div class="formula">
+                        \[ m = \kappa I \]
+                        <small>where κ = ℓₚ²/ℏc</small>
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Emergent Spacetime</h3>
+                    <p>Spacetime geometry emerges from information density gradients through quantum error correction:</p>
+                    <div class="formula">
+                        \[ g_{\mu\nu} = \eta_{\mu\nu} + \alpha \frac{\partial^2 \log I}{\partial x^\mu \partial x^\nu} \]
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Holographic Principle</h3>
+                    <p>Information on boundaries determines bulk geometry. The maximum information in a region 
+                    scales with surface area, not volume:</p>
+                    <div class="formula">
+                        \[ S_{max} = \frac{A}{4\ell_P^2} \]
+                    </div>
+                </div>
+
+                <div class="theory-card">
+                    <h3>Dark Energy Resolution</h3>
+                    <p>The cosmological constant represents the baseline information density required for 
+                    spacetime stability:</p>
+                    <div class="formula">
+                        \[ \rho_\Lambda = I_0 c^2 \]
+                        <small>where I₀ ≈ 10⁻¹²³ I_Planck</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="implementation" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Haskell Implementation</h2>
+            <p class="section-subtitle">Complete proof-as-code framework demonstrating E = Ic²</p>
+            
+            <div class="impl-grid">
+                <div class="impl-card">
+                    <div class="impl-icon">📐</div>
+                    <h3>Higher Category Theory</h3>
+                    <p>2-categories and ∞-categories encoding spacetime emergence from information</p>
+                    <pre><code class="language-haskell">-- Emergent spacetime from information
+computeInfoEnergyEquivalence :: InformationDensity -> Double -> Double
+computeInfoEnergyEquivalence info c = 
+    let i = infoValue info
+        c2 = c * c
+    in i * c2  -- E = Ic²</code></pre>
+                </div>
+
+                <div class="impl-card">
+                    <div class="impl-icon">🔬</div>
+                    <h3>Quantum Algebra</h3>
+                    <p>Quantum groups and representation theory for emergent gauge symmetries</p>
+                    <pre><code class="language-haskell">-- Quantum Poincaré algebra
+twistedPoincare :: Double -> QuantumPoincare Double
+twistedPoincare kappa = QuantumPoincare
+    { qpDeformParam = kappa  -- Planck scale
+    , qpRMatrix = computeRMatrix kappa 4
+    }</code></pre>
+                </div>
+
+                <div class="impl-card">
+                    <div class="impl-icon">📊</div>
+                    <h3>Information Geometry</h3>
+                    <p>Fisher metrics and emergent spacetime geometry from information</p>
+                    <pre><code class="language-haskell">-- Emergent metric from information
+computeEmergentMetric :: (V.Vector Double -> Double) 
+                      -> V.Vector Double -> Matrix Double
+computeEmergentMetric infoDensity x = 
+    matrixAdd minkowski (scalarMult α d2logI)</code></pre>
+                </div>
+
+                <div class="impl-card">
+                    <div class="impl-icon">⚛️</div>
+                    <h3>Quantum Circuits</h3>
+                    <p>Error correction codes generating emergent spacetime structure</p>
+                    <pre><code class="language-haskell">-- Surface code for spacetime
+createSurfaceCode :: Int -> Int -> QECCode
+createSurfaceCode rows cols = QECCode
+    { codeDistance = min rows cols
+    , encodingCircuit = surfaceCodeEncoding
+    }</code></pre>
+                </div>
+
+                <div class="impl-card">
+                    <div class="impl-icon">🕸️</div>
+                    <h3>Tensor Networks</h3>
+                    <p>MERA and holographic correspondence from entanglement</p>
+                    <pre><code class="language-haskell">-- MERA for critical systems
+createMERA :: Int -> Int -> MERA
+computeMERAEntanglement :: MERA -> Int -> Int -> Double
+extractAdSCFT :: MERA -> (Double, [[Double]])</code></pre>
+                </div>
+
+                <div class="impl-card">
+                    <div class="impl-icon">🤖</div>
+                    <h3>Machine Learning</h3>
+                    <p>Neural networks and genetic algorithms for optimal code discovery</p>
+                    <pre><code class="language-haskell">-- Discover spacetime codes
+discoverSpacetimeCodes :: Int -> StdGen 
+                       -> [ErrorCorrectionCode]
+spacetimeFitness :: ErrorCorrectionCode -> Double</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demos" class="section">
+        <div class="container">
+            <h2 class="section-title">Interactive Demonstrations</h2>
+            
+            <div class="demo-container">
+                <div class="demo-card">
+                    <h3>Information to Energy Converter</h3>
+                    <div class="demo-input">
+                        <label for="infoInput">Information Density (bits/m³):</label>
+                        <input type="number" id="infoInput" value="1e20" step="1e19">
+                        <button onclick="calculateEnergy()" class="btn btn-calculate">Calculate</button>
+                    </div>
+                    <div class="demo-output" id="energyOutput">
+                        <div class="output-row">
+                            <span>Energy:</span>
+                            <span id="energyValue">-</span>
+                        </div>
+                        <div class="output-row">
+                            <span>Equivalent Mass:</span>
+                            <span id="massValue">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>Quantum Circuit Visualization</h3>
+                    <canvas id="circuitCanvas" width="400" height="200"></canvas>
+                    <button onclick="runQuantumSimulation()" class="btn btn-simulate">Run Simulation</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="papers" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Research Papers</h2>
+            <div class="papers-grid">
+                <a href="/papers/foundations/src/information_energy_equivalence_paper.tex" class="paper-card">
+                    <div class="paper-icon">📄</div>
+                    <h3>Information-Energy Equivalence in Emergent Spacetime</h3>
+                    <p>Complete mathematical derivation of E = Ic² from quantum error correction</p>
+                    <span class="paper-link">Read Paper →</span>
+                </a>
+                
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers" class="paper-card">
+                    <div class="paper-icon">📚</div>
+                    <h3>Full Paper Collection</h3>
+                    <p>Complete collection of papers on emergent spacetime and information physics</p>
+                    <span class="paper-link">Browse Papers →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>E = Ic²</h4>
+                    <p>Reality emerges from information</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub Repository</a>
+                    <a href="/papers/foundations/src/information_energy_equivalence_paper.tex">Main Paper</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Matthew Long<br>YonedaAI</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Information-Energy Equivalence Framework. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

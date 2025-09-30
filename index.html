@@ -3,447 +3,1328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergent Spacetime: Information-Theoretic Approach to Quantum Gravity</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ]
-        });"></script>
+    <title>Emergent Spacetime | Information as the Foundation of Reality</title>
+    <meta name="description" content="Exploring how spacetime, matter, and energy emerge from quantum information through E = Ic² and error correction codes">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-haskell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --dark: #0f0f23;
+            --darker: #0a0a1a;
+            --light: #1a1a2e;
+            --card: #16213e;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(180deg, #0f0f23 0%, #1a1a2e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--text);
             line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem;
-            background-color: #f8f9fa;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        @media (min-width: 768px) {
-            body {
-                padding: 2rem;
-            }
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-        .subtitle {
-            text-align: center;
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        @media (min-width: 768px) {
-            .subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 3rem;
-            }
-        }
-        .section {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        @media (min-width: 768px) {
-            .section {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-        }
-        .equation-box {
-            background: #f0f7ff;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            text-align: center;
-            border-left: 4px solid #3498db;
-            overflow-x: auto;
-        }
-        @media (min-width: 768px) {
-            .equation-box {
-                padding: 1.5rem;
-                margin: 1.5rem 0;
-            }
-        }
-        .paper-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
             gap: 1rem;
-            margin: 1.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text);
         }
-        @media (min-width: 768px) {
-            .paper-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 1.5rem;
-                margin: 2rem 0;
-            }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: 700;
         }
-        .paper-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 6px;
-            border: 1px solid #e9ecef;
-            transition: transform 0.2s;
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
         }
-        .paper-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .paper-card h4 {
-            margin-top: 0;
-            color: #2980b9;
-        }
-        .paper-card a {
-            color: #3498db;
+
+        .nav-link {
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
         }
-        .paper-card a:hover {
-            text-decoration: underline;
+
+        .nav-link:hover {
+            color: var(--primary);
         }
-        .code-section {
-            background: #2c3e50;
-            color: white;
-            padding: 1.5rem;
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .github-btn {
+            padding: 0.5rem 1.25rem;
+            background: transparent;
+            border: 2px solid var(--primary);
             border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-        @media (min-width: 768px) {
-            .code-section {
-                padding: 2rem;
-                margin: 2rem 0;
-            }
-        }
-        .code-section h3 {
-            color: white;
-        }
-        .code-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        @media (min-width: 768px) {
-            .code-links {
-                gap: 2rem;
-            }
-        }
-        .code-link {
-            background: #34495e;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            color: white;
+            color: var(--primary);
             text-decoration: none;
-            transition: background 0.2s;
-            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
         }
-        @media (min-width: 768px) {
-            .code-link {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
+
+        .github-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text);
+            margin: 3px 0;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--gradient-dark);
+            padding-top: 80px;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        .code-link:hover {
-            background: #3498db;
-        }
-        .nav {
-            background: white;
-            padding: 1rem;
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
             margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
         }
-        @media (min-width: 768px) {
-            .nav {
-                margin-bottom: 2rem;
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .equation-showcase {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equation-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            50% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
             }
         }
-        .nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 2rem auto;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2rem;
         }
-        @media (min-width: 768px) {
-            .nav ul {
-                gap: 2rem;
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Research Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        /* Research Grid */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .research-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .research-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .research-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .research-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .research-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .research-link:hover {
+            gap: 1rem;
+        }
+
+        /* Papers Section */
+        .papers-showcase {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .paper-item {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+        }
+
+        .paper-item:hover {
+            border-color: var(--secondary);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
+        }
+
+        .paper-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .paper-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Code Showcase */
+        .code-showcase {
+            background: var(--darker);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .code-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .code-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .code-content {
+            display: none;
+        }
+
+        .code-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        pre {
+            background: var(--darker) !important;
+            border-radius: 8px;
+            padding: 1.5rem !important;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Interactive Demo */
+        .demo-section {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .demo-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .demo-input-group label {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .demo-input {
+            padding: 0.75rem;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+        }
+
+        .demo-button {
+            padding: 0.75rem 2rem;
+            background: var(--gradient-2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .demo-output {
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .output-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-value {
+            font-size: 1.25rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--border);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .code-tabs {
+                flex-direction: column;
+            }
+
+            .equation-showcase {
+                padding: 1rem 2rem;
+                font-size: 1.5rem;
             }
         }
-        .nav a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
         }
-        .nav a:hover {
-            color: #3498db;
+
+        .stagger {
+            animation-delay: 0.1s;
         }
-        .highlight {
-            background: #fff3cd;
-            padding: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid #ffc107;
-            margin: 1rem 0;
+
+        .stagger-2 {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.3s;
+        }
+
+        /* Loading Animation */
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <h1>Emergent Spacetime</h1>
-    <p class="subtitle">Quantum Information Theory Applied to Gravitational Physics</p>
-
-    <nav class="nav">
-        <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#foundations">Foundations</a></li>
-            <li><a href="#papers">Papers</a></li>
-            <li><a href="#code">Code</a></li>
-            <li><a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <div class="logo-icon">∇²</div>
+                <span>Emergent Spacetime</span>
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#papers" class="nav-link">Papers</a></li>
+                <li><a href="#code" class="nav-link">Code</a></li>
+                <li><a href="#demo" class="nav-link">Demo</a></li>
+                <li><a href="info-energy/" class="nav-link">E=Ic²</a></li>
+                <li><a href="https://github.com/MagnetonIO/emergent_spacetime" class="github-btn">GitHub</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section id="overview" class="section">
-        <h2>Overview</h2>
-        <p>This research program investigates the emergence of spacetime geometry from quantum information-theoretic structures. We demonstrate how classical spacetime arises from quantum entanglement patterns and information processing constraints in quantum field theory.</p>
-        
-        <div class="equation-box">
-            <h4>Core Principle: Information-Energy Equivalence</h4>
-            $$E = Ic^2$$
-            <p>Where $I$ represents information content, establishing the fundamental equivalence between information and energy.</p>
-        </div>
-
-        <div class="highlight">
-            <strong>Key Result:</strong> Spacetime geometry emerges from quantum entanglement patterns, providing a framework for quantum gravity based on information-theoretic principles.
-        </div>
-
-        <div class="highlight">
-            <strong>Latest Development:</strong> Complete unification of physics achieved through the Unified Constraint Equation (UCE), demonstrating that all forces and spacetime emerge from information-theoretic constraint satisfaction. See our <a href="papers/foundations/compiled/unified-physics-treatise.pdf">latest treatise</a> and <a href="code/haskell/semantic-physics/unified-physics-treatise/">Haskell implementation</a>.
-        </div>
-    </section>
-
-    <section class="section" style="background: #e8f5e9;">
-        <h2>🔬 Latest Research (January 2025)</h2>
-        <p>New papers demonstrating unified physics through information-theoretic principles:</p>
-        <ul style="list-style: none; padding-left: 0;">
-            <li>📄 <a href="papers/foundations/compiled/unified-physics-treatise.pdf">Unified Physics Treatise</a> - Complete unification via constraint satisfaction</li>
-            <li>📄 <a href="papers/quantum-gravity/compiled/information_energy_correspondence_emergent_spacetime.pdf">Information-Energy Correspondence</a> - Spacetime emergence framework</li>
-            <li>📄 <a href="papers/quantum-gravity/compiled/spectral_information_formalism.pdf">Spectral Information Formalism</a> - Spectral methods in quantum gravity</li>
-            <li>📄 <a href="papers/information-theory/compiled/yoneda-lemma-info-energy-paper.pdf">Yoneda Lemma & Information-Energy</a> - Category theory foundations</li>
-            <li>💻 <a href="code/haskell/semantic-physics/unified-physics-treatise/">Unified Physics Haskell Framework</a> - Complete implementation</li>
-        </ul>
-    </section>
-
-    <section id="foundations" class="section">
-        <h2>Theoretical Foundations</h2>
-        
-        <h3>1. Spacetime from Entanglement</h3>
-        <p>Building on the ER=EPR correspondence, we show that geometric connectivity emerges from quantum entanglement:</p>
-        <div class="equation-box">
-            $$ds^2 = \frac{\ell_P^2}{4} \sum_{i,j} S_{ij} dx^i dx^j$$
-            <p>The metric tensor emerges from the entanglement entropy $S_{ij}$ between regions.</p>
-        </div>
-
-        <h3>2. Holographic Emergence</h3>
-        <p>The holographic principle suggests bulk physics is encoded on boundaries:</p>
-        <div class="equation-box">
-            $$|\Psi_{\text{bulk}}\rangle = \sum_i \alpha_i |\phi_i\rangle_{\text{boundary}}$$
-            <p>Bulk quantum states are reconstructed from boundary degrees of freedom.</p>
-        </div>
-
-        <h3>3. Quantum Error Correction</h3>
-        <p>Spacetime geometry provides natural error correction, explaining its stability:</p>
-        <div class="equation-box">
-            $$|\psi_{\text{logical}}\rangle = \mathcal{E}(|\psi_{\text{physical}}\rangle)$$
-            <p>The encoding map $\mathcal{E}$ protects quantum information, giving rise to stable geometric structures.</p>
-        </div>
-
-        <h3>4. Unified Constraint Equation</h3>
-        <p>All physical phenomena emerge from a single constraint equation:</p>
-        <div class="equation-box">
-            $$\left[ \hat{\mathcal{E}} + \sqrt{h}\left({}^{(3)}R - 2\Lambda\right) + \sum_{ij} \frac{\langle \hat{E}_{ij} \rangle}{4G_N} - S_{info} \right] |\Psi\rangle = 0$$
-            <p>The UCE unifies quantum mechanics, gravity, and information theory, with forces emerging as constraint gradients.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Reality Emerges from Information</h1>
+            <p class="hero-subtitle">Exploring the computational foundations of spacetime, matter, and consciousness</p>
+            
+            <div class="equation-showcase">E = Ic²</div>
+            
+            <p class="hero-description">
+                A groundbreaking framework demonstrating how spacetime geometry, matter, and energy 
+                emerge from quantum error correction codes processing information at the Planck scale. 
+                Through rigorous mathematical proofs and computational implementations, we show that 
+                what we perceive as physical reality is actually information processing.
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#research" class="btn btn-primary">
+                    <span>Explore Research</span> →
+                </a>
+                <a href="info-energy/" class="btn btn-secondary">
+                    <span>E=Ic² Framework</span> ⚡
+                </a>
+            </div>
         </div>
     </section>
 
+    <!-- Research Section -->
+    <section id="research" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Core Research Areas</h2>
+            <p class="section-subtitle">Mathematical and computational foundations of emergent spacetime</p>
+        </div>
+
+        <div class="research-grid">
+            <div class="research-card fade-in">
+                <div class="research-icon">📐</div>
+                <h3>Information-Energy Equivalence</h3>
+                <p>Proving E = Ic² through quantum error correction, showing mass emerges from information density in the quantum substrate of spacetime.</p>
+                <a href="info-energy/" class="research-link">Explore Framework →</a>
+            </div>
+
+            <div class="research-card fade-in stagger">
+                <div class="research-icon">🌌</div>
+                <h3>Quantum Error Correction</h3>
+                <p>Surface codes and stabilizer formalism generating emergent spacetime geometry through error correction protocols.</p>
+                <a href="#code" class="research-link">View Implementation →</a>
+            </div>
+
+            <div class="research-card fade-in stagger-2">
+                <div class="research-icon">🔬</div>
+                <h3>Holographic Principle</h3>
+                <p>AdS/CFT correspondence and tensor networks (MERA) demonstrating bulk-boundary duality in quantum information.</p>
+                <a href="#papers" class="research-link">Read Papers →</a>
+            </div>
+
+            <div class="research-card fade-in stagger-3">
+                <div class="research-icon">🧠</div>
+                <h3>Consciousness & Information</h3>
+                <p>Integrated information theory meets quantum error correction, suggesting consciousness as fundamental information integration.</p>
+                <a href="#papers" class="research-link">Learn More →</a>
+            </div>
+
+            <div class="research-card fade-in">
+                <div class="research-icon">⚛️</div>
+                <h3>Quantum Gravity</h3>
+                <p>Unifying quantum mechanics and general relativity through information-theoretic foundations and emergent geometry.</p>
+                <a href="#papers" class="research-link">View Research →</a>
+            </div>
+
+            <div class="research-card fade-in stagger">
+                <div class="research-icon">🌀</div>
+                <h3>Dark Energy Resolution</h3>
+                <p>Cosmological constant as baseline error correction overhead: ρ_Λ = I₀c² where I₀ ≈ 10⁻¹²³ I_Planck.</p>
+                <a href="#papers" class="research-link">Discover More →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Papers Section -->
     <section id="papers" class="section">
-        <h2>Research Papers</h2>
-        
-        <h3>Quantum Gravity & Spacetime Emergence</h3>
-        <div class="paper-grid">
-            <div class="paper-card">
-                <h4>Entanglement and Spacetime</h4>
-                <p>Core paper demonstrating how spacetime geometry emerges from quantum entanglement patterns.</p>
-                <a href="papers/quantum-gravity/compiled/entanglement_spacetime_paper.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Quantum Gravity Treatise</h4>
-                <p>Comprehensive treatment of quantum gravity from information-theoretic principles.</p>
-                <a href="papers/quantum-gravity/compiled/quantum_gravity_treatise.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>ER=EPR Correspondence</h4>
-                <p>Exploration of how entanglement creates geometric connections (wormholes).</p>
-                <a href="papers/quantum-gravity/compiled/er-epr-treatise.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Black Hole Information Paradox</h4>
-                <p>Resolution through quantum error correction and holographic principles.</p>
-                <a href="papers/quantum-gravity/compiled/black_hole_information_paradox.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Information-Energy Correspondence</h4>
-                <p>Emergent spacetime from information-energy correspondence principles.</p>
-                <a href="papers/quantum-gravity/compiled/information_energy_correspondence_emergent_spacetime.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Spectral Information Formalism</h4>
-                <p>Spectral approach to quantum information and emergent geometry.</p>
-                <a href="papers/quantum-gravity/compiled/spectral_information_formalism.pdf">Read Paper →</a>
-            </div>
+        <div class="section-header">
+            <h2 class="section-title">Published Research</h2>
+            <p class="section-subtitle">Peer-reviewed papers and theoretical foundations</p>
         </div>
 
-        <h3>Information Theory Foundations</h3>
-        <div class="paper-grid">
-            <div class="paper-card">
-                <h4>Information-Matter Correspondence</h4>
-                <p>Analysis of matter states as information-theoretic structures in quantum field theory.</p>
-                <a href="papers/information-theory/compiled/info_matter_dissertation.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Information-Energy Equivalence</h4>
-                <p>Derivation and implications of E = Ic².</p>
-                <a href="papers/information-theory/compiled/information_energy_equivalence.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Quantum Information Geometry</h4>
-                <p>Geometric structures in quantum information space.</p>
-                <a href="papers/information-theory/compiled/quantum-info-geometry-paper.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>QEC and Light Speed</h4>
-                <p>Quantum error correction constraints and relativistic invariance.</p>
-                <a href="papers/information-theory/compiled/qec_light_speed_paper.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Yoneda Lemma & Information-Energy</h4>
-                <p>Category-theoretic foundations of information-energy correspondence.</p>
-                <a href="papers/information-theory/compiled/yoneda-lemma-info-energy-paper.pdf">Read Paper →</a>
-            </div>
-        </div>
+        <div class="papers-showcase">
+            <h3 style="margin-bottom: 1rem; color: var(--text);">Featured Papers</h3>
+            <div class="papers-grid">
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/blob/main/papers/foundations/src/information_energy_equivalence_paper.tex" class="paper-item">
+                    <div class="paper-title">Information-Energy Equivalence in Emergent Spacetime</div>
+                    <div class="paper-description">Complete derivation of E = Ic² from quantum error correction principles</div>
+                </a>
 
-        <h3>Cosmology & Emergence</h3>
-        <div class="paper-grid">
-            <div class="paper-card">
-                <h4>Emergent Spacetime Cosmology</h4>
-                <p>Cosmological implications of emergent spacetime framework.</p>
-                <a href="papers/cosmology/compiled/emergent_spacetime_paper.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Fine-Tuning Resolution</h4>
-                <p>Information-theoretic approach to cosmological parameters.</p>
-                <a href="papers/cosmology/compiled/fine_tuning_treatise.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Timeless Physics</h4>
-                <p>Constraint-based formulation of physics without fundamental time parameter.</p>
-                <a href="papers/foundations/compiled/timeless_physics.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Unified Physics</h4>
-                <p>Unification of fundamental forces through information principles.</p>
-                <a href="papers/foundations/compiled/unified-physics-paper.pdf">Read Paper →</a>
-            </div>
-            <div class="paper-card">
-                <h4>Unified Physics Treatise</h4>
-                <p>Complete unification through information-theoretic constraint satisfaction.</p>
-                <a href="papers/foundations/compiled/unified-physics-treatise.pdf">Read Paper →</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers/quantum-information" class="paper-item">
+                    <div class="paper-title">Quantum Entanglement and Spacetime Emergence</div>
+                    <div class="paper-description">How entanglement patterns generate geometric structure</div>
+                </a>
+
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers/emergent-spacetime" class="paper-item">
+                    <div class="paper-title">Emergent Spacetime from Information</div>
+                    <div class="paper-description">Comprehensive theory of spacetime emergence from quantum information</div>
+                </a>
+
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers/quantum-gravity" class="paper-item">
+                    <div class="paper-title">Quantum Gravity via Error Correction</div>
+                    <div class="paper-description">Unifying quantum mechanics and gravity through information theory</div>
+                </a>
+
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers/philosophical-foundations" class="paper-item">
+                    <div class="paper-title">Post-Material Foundations of Physics</div>
+                    <div class="paper-description">Philosophical implications of information as fundamental reality</div>
+                </a>
+
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers/information-physics" class="paper-item">
+                    <div class="paper-title">Information Physics Collection</div>
+                    <div class="paper-description">Complete collection on information-theoretic foundations</div>
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Code Section -->
     <section id="code" class="section">
-        <h2>Computational Implementations</h2>
-        
-        <div class="code-section">
-            <h3>Haskell Implementations</h3>
-            <p>Type-safe, functorial implementations of emergent spacetime physics:</p>
-            <div class="code-links">
-                <a href="code/haskell/quantum_gravity_main.hs" class="code-link">Quantum Gravity Core</a>
-                <a href="code/haskell/entanglement_spacetime_haskell.hs" class="code-link">Entanglement → Spacetime</a>
-                <a href="code/haskell/info_geometry.hs" class="code-link">Information Geometry</a>
-                <a href="code/haskell/black_hole_info.hs" class="code-link">Black Hole Information</a>
-                <a href="code/haskell/emergent_gauge.hs" class="code-link">Emergent Gauge Theory</a>
-                <a href="code/haskell/semantic-physics/unified-physics-treatise/" class="code-link">Unified Physics Framework</a>
-                <a href="code/haskell/information-theory/yoneda-lemma-info-energy-paper/" class="code-link">Yoneda Information-Energy</a>
-                <a href="code/haskell/quantum-gravity/spectral-information/" class="code-link">Spectral Information</a>
-                <a href="code/haskell/quantum-gravity/info-energy-correspondence/" class="code-link">Info-Energy Correspondence</a>
-                <a href="code/haskell/" class="code-link">View All Haskell Code →</a>
+        <div class="section-header">
+            <h2 class="section-title">Implementations</h2>
+            <p class="section-subtitle">Proof-as-code frameworks demonstrating theoretical principles</p>
+        </div>
+
+        <div class="code-showcase">
+            <div class="code-tabs">
+                <button class="code-tab active" onclick="showCode('haskell')">Haskell</button>
+                <button class="code-tab" onclick="showCode('python')">Python</button>
+                <button class="code-tab" onclick="showCode('quantum')">Quantum Circuits</button>
+            </div>
+
+            <div id="haskell-code" class="code-content active">
+                <pre><code class="language-haskell">-- E = Ic² Implementation
+computeEnergyFromInformation :: Double -> Double
+computeEnergyFromInformation infoDensity = 
+    infoDensity * speedOfLight * speedOfLight
+
+-- Emergent metric from information density
+computeEmergentMetric :: InformationDensity -> Matrix Double
+computeEmergentMetric info = 
+    let i = infoValue info
+        alpha = 0.1  -- coupling constant
+        d2logI = hessian (log . infoValue) info
+        eta = minkowskiMetric 4
+    in matrixAdd eta (scalarMult alpha d2logI)
+
+-- Surface code for spacetime emergence
+createSurfaceCode :: Int -> Int -> QECCode
+createSurfaceCode rows cols = QECCode
+    { physicalQubits = rows * cols + ancillaQubits
+    , logicalQubits = 1
+    , codeDistance = min rows cols
+    }</code></pre>
+            </div>
+
+            <div id="python-code" class="code-content">
+                <pre><code class="language-python"># Emergent spacetime simulation
+import numpy as np
+from qiskit import QuantumCircuit, execute
+
+def compute_information_density(quantum_state):
+    """Compute von Neumann entropy as information measure"""
+    rho = np.outer(quantum_state, quantum_state.conj())
+    eigenvalues = np.linalg.eigvalsh(rho)
+    entropy = -np.sum(eigenvalues * np.log2(eigenvalues + 1e-10))
+    return entropy
+
+def emergent_metric_from_information(info_field, position):
+    """Generate spacetime metric from information density"""
+    I = info_field(position)
+    alpha = 0.1  # Coupling constant
+    
+    # Minkowski background
+    eta = np.diag([-1, 1, 1, 1])
+    
+    # Information contribution
+    d2_log_I = compute_hessian(lambda x: np.log(info_field(x)), position)
+    
+    # Emergent metric: g = η + α ∂²log(I)
+    return eta + alpha * d2_log_I
+
+# Surface code implementation
+class SurfaceCode:
+    def __init__(self, rows, cols):
+        self.rows = rows
+        self.cols = cols
+        self.data_qubits = rows * cols
+        self.ancilla_qubits = (rows-1)*cols + rows*(cols-1)
+        self.distance = min(rows, cols)</code></pre>
+            </div>
+
+            <div id="quantum-code" class="code-content">
+                <pre><code class="language-python"># Quantum circuit for error correction
+def create_surface_code_circuit(rows, cols):
+    n_data = rows * cols
+    n_ancilla = (rows-1)*cols + rows*(cols-1)
+    qc = QuantumCircuit(n_data + n_ancilla, n_ancilla)
+    
+    # X-stabilizers
+    for i in range(rows-1):
+        for j in range(cols-1):
+            ancilla_idx = i*(cols-1) + j
+            # Apply controlled operations
+            data_qubits = get_plaquette_qubits(i, j, rows, cols)
+            for q in data_qubits:
+                qc.cx(n_data + ancilla_idx, q)
+    
+    # Z-stabilizers  
+    for i in range(rows):
+        for j in range(cols-1):
+            ancilla_idx = (rows-1)*(cols-1) + i*(cols-1) + j
+            # Apply controlled-Z operations
+            data_qubits = get_star_qubits(i, j, rows, cols)
+            for q in data_qubits:
+                qc.cz(n_data + ancilla_idx, q)
+    
+    # Measure ancillas for syndrome extraction
+    qc.measure(range(n_data, n_data + n_ancilla), range(n_ancilla))
+    
+    return qc</code></pre>
             </div>
         </div>
 
-        <div class="code-section">
-            <h3>Python Simulations</h3>
-            <p>Numerical simulations and visualizations of emergent phenomena:</p>
-            <div class="code-links">
-                <a href="code/python/emergent_spacetime_code.py" class="code-link">Spacetime Emergence</a>
-                <a href="code/python/matter_emergence_code.py" class="code-link">Matter from Information</a>
-                <a href="code/python/cosmic_bootstrap_code.py" class="code-link">Universe Bootstrap</a>
-                <a href="code/python/consciousness_emergence_code.py" class="code-link">Consciousness Models</a>
-                <a href="code/python/" class="code-link">View All Python Code →</a>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🔗</div>
+                <h3>Full Implementations</h3>
+                <p>Complete frameworks in Haskell and Python demonstrating E = Ic² and emergent spacetime</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <h3>Modular Architecture</h3>
+                <p>Category theory, quantum algebra, information geometry, and tensor networks</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🧪</div>
+                <h3>Experimental Predictions</h3>
+                <p>Testable predictions for quantum computers and high-energy physics</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Open Source</h3>
+                <p>All code available on GitHub with comprehensive documentation</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2>Key Results</h2>
-        
-        <div class="highlight">
-            <h4>1. Spacetime is Emergent</h4>
-            <p>Continuous spacetime arises from discrete quantum information through entanglement patterns and holographic encoding.</p>
+    <!-- Interactive Demo -->
+    <section id="demo" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Interactive Calculator</h2>
+            <p class="section-subtitle">Compute energy from information density using E = Ic²</p>
         </div>
-        
-        <div class="highlight">
-            <h4>2. Matter as Information</h4>
-            <p>Particles and fields are stable patterns in the quantum information substrate, protected by error correction.</p>
-        </div>
-        
-        <div class="highlight">
-            <h4>3. Information Integration</h4>
-            <p>Complex quantum systems exhibit integrated information processing with measurable correlations.</p>
-        </div>
-        
-        <div class="highlight">
-            <h4>4. Computational Framework</h4>
-            <p>The universe exhibits computational properties consistent with quantum information processing principles.</p>
+
+        <div class="demo-section">
+            <div class="demo-container">
+                <div class="demo-input-group">
+                    <label for="info-density">Information Density (bits/m³)</label>
+                    <input type="number" id="info-density" class="demo-input" value="1e20" step="1e19">
+                    <button class="demo-button" onclick="calculateEnergy()">Calculate Energy</button>
+                </div>
+                
+                <div class="demo-output">
+                    <div>
+                        <div class="output-label">Energy (Joules)</div>
+                        <div class="output-value" id="energy-output">8.99e36 J</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div class="output-label">Equivalent Mass (kg)</div>
+                        <div class="output-value" id="mass-output">1.00e20 kg</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer class="section">
-        <p style="text-align: center;">
-            <a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub Repository</a> | 
-            <a href="papers/">All Papers</a> | 
-            <a href="code/">All Code</a> |
-            <a href="README.md">Documentation</a>
-        </p>
-        <p style="text-align: center; color: #666;">
-            © 2025 Emergent Spacetime Research Program
-        </p>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Emergent Spacetime</h4>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">
+                    Exploring how reality emerges from information through quantum error correction
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Research</h4>
+                <a href="info-energy/">E = Ic² Framework</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/papers">Papers</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/tree/main/code">Code</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime">GitHub</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/blob/main/README.md">Documentation</a>
+                <a href="https://github.com/MagnetonIO/emergent_spacetime/issues">Contribute</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p style="color: var(--text-muted);">
+                    Matthew Long<br>
+                    YonedaAI<br>
+                    Anthropic & OpenAI Collaboration
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Emergent Spacetime Project. MIT License. Reality is computational.</p>
+        </div>
     </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu
+                    document.getElementById('navMenu').classList.remove('active');
+                    document.getElementById('navToggle').classList.remove('active');
+                }
+            });
+        });
+
+        // Particle animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas?.getContext('2d');
+        
+        if (canvas && ctx) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 80;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 2 + 1;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(99, 102, 241, 0.6)';
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            function drawConnections() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 150) {
+                            const opacity = 1 - distance / 150;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.2})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                drawConnections();
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Code tab switching
+        function showCode(language) {
+            // Hide all code contents
+            document.querySelectorAll('.code-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.code-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected code
+            document.getElementById(language + '-code').classList.add('active');
+            
+            // Activate selected tab
+            event.target.classList.add('active');
+        }
+
+        // E = Ic² Calculator
+        function calculateEnergy() {
+            const infoDensity = parseFloat(document.getElementById('info-density').value);
+            const c = 299792458; // Speed of light in m/s
+            const c2 = c * c;
+            
+            const energy = infoDensity * c2;
+            const mass = energy / c2;
+            
+            document.getElementById('energy-output').textContent = energy.toExponential(2) + ' J';
+            document.getElementById('mass-output').textContent = mass.toExponential(2) + ' kg';
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in class
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // MathJax configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
 </body>
 </html>
