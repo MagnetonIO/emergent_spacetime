@@ -145,7 +145,7 @@ Information on boundaries determines bulk geometry through quantum error correct
 ## Architecture
 
 ```
-information_energy_equivalence/
+code/haskell/foundations/information_energy_equivalence/
 ├── src/
 │   ├── Main.hs                        # Main framework integration
 │   ├── HigherCategory.hs              # 2-categories, ∞-categories
