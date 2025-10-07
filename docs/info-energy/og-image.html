@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@600;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #0f0f23 100%);
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background pattern */
+        .bg-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(99, 102, 241, 0.1) 35px, rgba(99, 102, 241, 0.1) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(139, 92, 246, 0.1) 35px, rgba(139, 92, 246, 0.1) 70px);
+        }
+        
+        /* Quantum nodes */
+        .quantum-nodes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(99, 102, 241, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+            transform-origin: left center;
+        }
+        
+        /* Main content */
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+        
+        .equation-main {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 120px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 80px rgba(99, 102, 241, 0.5);
+        }
+        
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        
+        .badges {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .badge {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            font-size: 20px;
+        }
+        
+        /* Decorative elements */
+        .corner-decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        .top-left {
+            top: 30px;
+            left: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .top-right {
+            top: 30px;
+            right: 30px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .bottom-left {
+            bottom: 30px;
+            left: 30px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .bottom-right {
+            bottom: 30px;
+            right: 30px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .url {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #64748b;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="quantum-nodes">
+        <!-- Static quantum nodes for visual effect -->
+        <div class="node" style="top: 100px; left: 200px;"></div>
+        <div class="node" style="top: 150px; left: 400px;"></div>
+        <div class="node" style="top: 200px; left: 600px;"></div>
+        <div class="node" style="top: 250px; left: 800px;"></div>
+        <div class="node" style="top: 300px; left: 1000px;"></div>
+        <div class="node" style="top: 400px; left: 300px;"></div>
+        <div class="node" style="top: 450px; left: 500px;"></div>
+        <div class="node" style="top: 500px; left: 700px;"></div>
+        <div class="node" style="top: 550px; left: 900px;"></div>
+        
+        <!-- Connections -->
+        <div class="connection" style="top: 100px; left: 200px; width: 200px; transform: rotate(15deg);"></div>
+        <div class="connection" style="top: 150px; left: 400px; width: 200px; transform: rotate(-10deg);"></div>
+        <div class="connection" style="top: 200px; left: 600px; width: 200px; transform: rotate(12deg);"></div>
+        <div class="connection" style="top: 400px; left: 300px; width: 200px; transform: rotate(-15deg);"></div>
+        <div class="connection" style="top: 450px; left: 500px; width: 200px; transform: rotate(8deg);"></div>
+    </div>
+    
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+    
+    <div class="content">
+        <div class="equation-main">E = Ic²</div>
+        <div class="title">Information-Energy Equivalence</div>
+        <div class="subtitle">
+            A fundamental reconceptualization where spacetime, matter, and energy<br>
+            emerge from quantum information processing
+        </div>
+        <div class="badges">
+            <div class="badge">
+                <span class="icon">⚛️</span>
+                <span>Quantum Theory</span>
+            </div>
+            <div class="badge">
+                <span class="icon">🔬</span>
+                <span>Emergent Spacetime</span>
+            </div>
+            <div class="badge">
+                <span class="icon">📐</span>
+                <span>Category Theory</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="url">magnetonio.github.io/emergent_spacetime</div>
+</body>
+</html>
